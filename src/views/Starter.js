@@ -50,7 +50,8 @@ const Starter = () => {
       {/***Top Cards***/}
 
       {/***Sales & Feed***/}
-      <Row>
+      Trang chủ
+      {/* <Row>
         <Col sm="6" lg="6" xl="7" xxl="8">
           <SalesChart />
         </Col>
@@ -58,13 +59,11 @@ const Starter = () => {
           <Feeds />
         </Col>
       </Row>
-      {/***Table ***/}
       <Row>
         <Col lg="12">
           <ProjectTables />
         </Col>
       </Row>
-      {/***Blog Cards***/}
       <Row>
         {BlogData.map((blg, index) => (
           <Col sm="6" lg="6" xl="3" key={index}>
@@ -77,7 +76,7 @@ const Starter = () => {
             />
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </div>
   );
 };
