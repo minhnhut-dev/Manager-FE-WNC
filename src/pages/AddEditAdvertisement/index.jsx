@@ -51,15 +51,15 @@ const AddEditAdvertisement = ({ isEdit }) => {
       const { data } = axiosService.put(`/advertisement/${AdvertisementId}`, {
         title: formik.values.title,
         description: formik.values.description,
-        start_date: formik.values.start_date,
-        end_date: formik.values.end_date,
+        startDate: formik.values.start_date,
+        endDate: formik.values.end_date,
         latitude: formik.values.lat,
         longitude: formik.values.long,
         width: formik.values.width_advertisement,
         height: formik.values.height_advertisement,
         price: formik.values.price,
-        is_approved: formik.values.isApproved,
-        is_active: formik.values.isActive,
+        isApproved: formik.values.isApproved,
+        isActive: formik.values.isActive,
       });
       return data;
     } catch (error) {
@@ -122,15 +122,15 @@ const AddEditAdvertisement = ({ isEdit }) => {
       const { data } = await axiosService.post("/advertisement", {
         title: formik.values.title,
         description: formik.values.description,
-        start_date: formik.values.start_date,
-        end_date: formik.values.end_date,
+        startDate: formik.values.start_date,
+        endDate: formik.values.end_date,
         latitude: formik.values.lat,
         longitude: formik.values.long,
         width: formik.values.width_advertisement,
         height: formik.values.height_advertisement,
         price: formik.values.price,
-        is_approved: formik.values.isApproved,
-        is_active: formik.values.isActive,
+        isApproved: formik.values.isApproved,
+        isActive: formik.values.isActive,
       });
       return data;
     } catch (error) {
