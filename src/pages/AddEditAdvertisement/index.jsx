@@ -46,9 +46,9 @@ const AddEditAdvertisement = ({ isEdit }) => {
     }
   }
 
-  const handleUpdateAdvertisement = () => {
+  const handleUpdateAdvertisement = async () => {
     try {
-      const { data } = axiosService.put(`/advertisement/${AdvertisementId}`, {
+      const { data } = await axiosService.put(`/advertisement/${AdvertisementId}`, {
         title: formik.values.title,
         description: formik.values.description,
         startDate: formik.values.start_date,
@@ -86,11 +86,10 @@ const AddEditAdvertisement = ({ isEdit }) => {
       try {
         if (isEdit) {
           await handleUpdateAdvertisement();
-          navigate("/danh-sach-bang-quang-cao")
         } else {
           await handleAddAdvertisement();
-          navigate("/danh-sach-bang-quang-cao")
         }
+        navigate("/danh-sach-bang-quang-cao", {state: {isReloadData: true}});
       } catch (error) {
       }
     },
