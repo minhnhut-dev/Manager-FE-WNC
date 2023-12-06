@@ -20,10 +20,10 @@ import { axiosService } from "../../services/axiosServices";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 
-const AddEditAdvertisement = ({ isEdit }) => {
+const Report = ({ isEdit }) => {
 
   const navigate = useNavigate();
-  let { AdvertisementId } = useParams();
+  let { surfaceId } = useParams();
 
   const validationSchema = yup.object().shape({
     address: yup.string().required("Vui lòng nhập tiêu đề"),
@@ -33,105 +33,82 @@ const AddEditAdvertisement = ({ isEdit }) => {
     long: yup.string().required("Vui lòng nhập vĩ độ"),
     phone: yup.string().required("Vui lòng nhập chiều dài"),
     email: yup.string().required("Vui lòng nhập chiều rộng"),
-    // price: yup.string().required("Vui lòng nhập giá tiền"),
   });
 
-  const getAdvertisement = async () => {
-    try {
-      const { data } = await axiosService.get(`/advertisements/${AdvertisementId}`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // const getAdvertisement = async () => {
+  //   try {
+  //     const { data } = await axiosService.get(`/advertisements/${AdvertisementId}`);
+  //     return data;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
-  const handleUpdateAdvertisement = async () => {
-    try {
-      const { data } = await axiosService.put(`/advertisements/${AdvertisementId}`, {
-        title: formik.values.title,
-        description: formik.values.description,
-        start_date: formik.values.start_date,
-        end_date: formik.values.end_date,
-        latitude: formik.values.lat,
-        longitude: formik.values.long,
-        width: formik.values.width_advertisement,
-        height: formik.values.height_advertisement,
-        price: formik.values.price,
-        is_approved: formik.values.isApproved,
-        is_active: formik.values.isActive,
-      });
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // const handleUpdateAdvertisement = async () => {
+  //   try {
+  //     const { data } = await axiosService.put(`/reports`, {
+  //       title: formik.values.title,
+  //       description: formik.values.description,
+  //       start_date: formik.values.start_date,
+  //       end_date: formik.values.end_date,
+  //       latitude: formik.values.lat,
+  //       longitude: formik.values.long,
+  //       width: formik.values.width_advertisement,
+  //       height: formik.values.height_advertisement,
+  //       price: formik.values.price,
+  //       is_approved: formik.values.isApproved,
+  //       is_active: formik.values.isActive,
+  //     });
+  //     return data;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   const formik = useFormik({
     initialValues: {
       address: "",
-      content: "",
-      report_date: "",
       lat: "",
       long: "",
-      phone: "",
+      report_date: "",
+      content: "",
       email: "",
-      state: "",
+      phone: "",
+      state: 0,
     },
     validationSchema: validationSchema,
     onSubmit: async () => {
       try {
         if (isEdit) {
-          await handleUpdateAdvertisement();
         } else {
           await handleAddAdvertisement();
+          alert("Thêm bảng báo cáo thành công");
         }
-        navigate("/danh-sach-bang-quang-cao");
+        navigate(-1);
       } catch (error) {
       }
     },
   });
 
-  useEffect(() => {
-    if (isEdit) {
-      getAdvertisement().then((data) => {
-        formik.setValues({
-          title: data.title,
-          description: data.description,
-          start_date: data.start_date,
-          end_date: data.end_date,
-          lat: data.latitude,
-          long: data.longitude,
-          width_advertisement: data.width,
-          height_advertisement: data.height,
-          price: data.price,
-          isApproved: data.is_approved,
-          isActive: data.is_active,
-        });
-      });
-    }
-
-  }, [AdvertisementId]);
-
   const handleAddAdvertisement = async () => {
+    console.log(formik.values)
     try {
-      const { data } = await axiosService.post("/advertisements", {
-        title: formik.values.title,
-        description: formik.values.description,
-        start_date: formik.values.start_date,
-        end_date: formik.values.end_date,
-        latitude: formik.values.lat,
-        longitude: formik.values.long,
-        width: formik.values.width_advertisement,
-        height: formik.values.height_advertisement,
-        price: formik.values.price,
-        is_approved: formik.values.isApproved,
-        is_active: formik.values.isActive,
+      const { data } = await axiosService.post("/reports", {
+        address: formik.values.address,
+        content: formik.values.content,
+        report_date: formik.values.report_date,
+        phone: formik.values.phone,
+        lat: formik.values.lat,
+        long: formik.values.long,
+        surfaces_id: surfaceId
       });
       return data;
     } catch (error) {
       throw error;
     }
   }
+
+  console.log(formik.values)
 
   return (
     <>
@@ -140,25 +117,25 @@ const AddEditAdvertisement = ({ isEdit }) => {
           <Col md={12}>
             <Card>
               <CardTitle className="text-center my-3 fw-bold" tag="h2">
-                {isEdit ? "Sửa bảng quảng cáo" : "Thêm bảng quảng cáo"}
+                {isEdit ? "Sửa bảng quảng cáo" : "Thêm bao cáo quảng cáo"}
               </CardTitle>
               <CardBody>
                 <Form onSubmit={formik.handleSubmit}>
                   <FormGroup>
                     <Label for="exampleEmail" className="fw-bold">
-                      Tiêu đề quảng cáo
+                      Address
                     </Label>
                     <Input
                       name="address"
-                      placeholder="Nhập tên bảng quảng cáo"
+                      placeholder="Nhập địa chỉ"
                       type="text"
                       invalid={
-                        formik.touched.title && Boolean(formik.errors.title)
+                        formik.touched.address && Boolean(formik.errors.address)
                       }
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     />
-                    <FormFeedback>{formik.errors.title}</FormFeedback>
+                    <FormFeedback>{formik.errors.address}</FormFeedback>
                   </FormGroup>
                   <FormGroup>
                     <Label for="exampleEmail" className="fw-bold">
@@ -166,7 +143,7 @@ const AddEditAdvertisement = ({ isEdit }) => {
                     </Label>
                     <Input
                       name="content"
-                      placeholder="Thông tin bảng quảng cáo"
+                      placeholder="Content"
                       type="textarea"
                       aria-multiline
                       rows="7"
@@ -175,14 +152,13 @@ const AddEditAdvertisement = ({ isEdit }) => {
                         formik.touched.content &&
                         Boolean(formik.errors.content)
                       }
-                      value={formik.values.content}
                       onBlur={formik.handleBlur}
                     />
-                    <FormFeedback>{formik.errors.description}</FormFeedback>
+                    <FormFeedback>{formik.errors.content}</FormFeedback>
                   </FormGroup>
                   <FormGroup>
                     <Label for="exampleEmail" className="fw-bold">
-                      report date
+                      Report date
                     </Label>
                     <Input
                       name="report_date"
@@ -196,22 +172,6 @@ const AddEditAdvertisement = ({ isEdit }) => {
                       // value={moment(formik.values.report_date).format("yyyy-MM-DD")}
                     />
                     <FormFeedback>{formik.errors.report_date}</FormFeedback>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="exampleEmail" className="fw-bold">
-                      Ngày kết thúc
-                    </Label>
-                    <Input
-                      name="end_date"
-                      type="date"
-                      onChange={formik.handleChange}
-                      invalid={
-                        formik.touched.end_date &&
-                        Boolean(formik.errors.end_date)
-                      }
-                      value={moment(formik.values.end_date).format("yyyy-MM-DD")}
-                    />
-                    <FormFeedback>{formik.errors.end_date}</FormFeedback>
                   </FormGroup>
                   <Col md={12} className="d-flex">
                     <Col md={6} className="p-2">
@@ -256,36 +216,34 @@ const AddEditAdvertisement = ({ isEdit }) => {
                     <Col md={6} className="d-flex">
                       <Col className="p-2">
                         <FormGroup>
-                          <Label className="fw-bold">Chiều dài</Label>
+                          <Label className="fw-bold">Email</Label>
                           <Input
-                            name="width_advertisement"
+                            name="email"
                             type="text"
-                            placeholder="Chiều dài bảng quảng cáo"
+                            placeholder="Email"
                             onChange={formik.handleChange}
                             invalid={
-                              formik.touched.width_advertisement &&
-                              Boolean(formik.errors.width_advertisement)
+                              formik.touched.email &&
+                              Boolean(formik.errors.email)
                             }
-                            value={formik.values.width_advertisement}
                           />
                           <FormFeedback>
-                            {formik.errors.width_advertisement}
+                            {formik.errors.email}
                           </FormFeedback>
                         </FormGroup>
                       </Col>
                       <Col className="p-2">
                         <FormGroup>
-                          <Label className="fw-bold">Chiều rộng</Label>
+                          <Label className="fw-bold">Phone</Label>
                           <Input
-                            name="height_advertisement"
+                            name="phone"
                             type="text"
-                            placeholder="Chiều rộng bảng quảng cáo"
+                            placeholder="Phone"
                             onChange={formik.handleChange}
                             invalid={
-                              formik.touched.height_advertisement &&
-                              Boolean(formik.errors.height_advertisement)
+                              formik.touched.phone &&
+                              Boolean(formik.errors.phone)
                             }
-                            value={formik.values.height_advertisement}
                           />
                           <FormFeedback>
                             {formik.errors.height_advertisement}
@@ -296,55 +254,26 @@ const AddEditAdvertisement = ({ isEdit }) => {
                     <Col md={6} className="p-2">
                       <FormGroup>
                         <Label for="exampleEmail" className="fw-bold">
-                          Giá tiền
+                          State
                         </Label>
-                        <Input
-                          name="price"
+                        <select className="form-control" id="exampleEmail" name="state" onChange={formik.handleChange} defaultValue={0}>
+                          <option value="0">Chưa xử lý</option>
+                          <option value="1"> xử lý rồi</option>
+                        </select>
+                        {/* <Input
+                          name="state"
                           type="text"
                           onChange={formik.handleChange}
                           invalid={
-                            formik.touched.price && Boolean(formik.errors.price)
+                            formik.touched.price && Boolean(formik.errors.state)
                           }
-                          value={formik.values.price}
-                        ></Input>
-                        <FormFeedback>{formik.errors.price}</FormFeedback>
+                        ></Input> */}
+                        <FormFeedback>{formik.errors.state}</FormFeedback>
                       </FormGroup>
                     </Col>
                   </Col>
-                  <Col md={12} className="d-flex">
-                    <Col md={6}>
-                      <Col md={3}>
-                        <Input
-                          type="checkbox"
-                          name="isActive"
-                          onChange={e => {
-                            formik.setFieldValue('isActive', e.target.checked ? 1 : 0);
-                          }}
-                          checked={formik.values.isActive}
-                        />
-                        &nbsp;
-                        <Label for="exampleEmail" className="fw-bold">
-                          Hiển thị
-                        </Label>
-                      </Col>
-                      <Col md={3}>
-                        <Input
-                          type="checkbox"
-                          name="isApproved"
-                          onChange={e => {
-                            formik.setFieldValue('isApproved', e.target.checked ? 1 : 0);
-                          }}
-                          checked={formik.values.isApproved}
-                        />{" "}
-                        &nbsp;
-                        <Label for="exampleEmail" className="fw-bold">
-                          Chấp nhận
-                        </Label>
-                      </Col>
-                    </Col>
-                  </Col>
                   <Col md={12}>
-                    {isEdit ? (<Button
+                    {/* {isEdit ? (<Button
                       color="success"
                       style={{ marginLeft: "40%" }}
                       type="submit"
@@ -358,7 +287,16 @@ const AddEditAdvertisement = ({ isEdit }) => {
                       disabled={formik.isSubmitting}
                     >
                       Thêm bảng quảng cáo
-                    </Button>}
+                    </Button>} */}
+
+                  <Button
+                      color="success"
+                      style={{ marginLeft: "40%" }}
+                      type="submit"
+                      disabled={formik.isSubmitting}
+                    >
+                      Add report
+                    </Button>
                   </Col>
                 </Form>
               </CardBody>
@@ -370,8 +308,5 @@ const AddEditAdvertisement = ({ isEdit }) => {
   );
 };
 
-AddEditAdvertisement.defaultProps = {
-  isEdit: false,
-};
 
-export default AddEditAdvertisement;
+export default Report;

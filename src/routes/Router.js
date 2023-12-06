@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import Surface from "../pages/Surface/index.jsx";
+import Report from "../pages/Report/index.jsx";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -22,14 +24,19 @@ const ThemeRoutes = [
       { path: "/", element: <Navigate to="/starter" /> },
       { path: "/starter", exact: true, element: <Starter /> },
       {
-        path: "/danh-sach-bang-quang-cao",
+        path: "/danh-sach-loai-bang-quang-cao",
         exact: true,
         element: <Advertisement />,
       },
       {
-        path: "/them-bang-quang-cao",
+        path: "/danh-sach-bang-quang-cao/:spaceId",
         exact: true,
-        element: <AddEditAdvertisement />,
+        element: <Surface />,
+      },
+      {
+        path: "/them-bao-cao-quang-cao/:surfaceId",
+        exact: true,
+        element: <Report />,
       },
       {
         path: "/sua-bang-quang-cao/:AdvertisementId",

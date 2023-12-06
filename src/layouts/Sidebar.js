@@ -9,7 +9,7 @@ const navigation = [
   },
   {
     title: "Bảng quảng cáo",
-    href: "/danh-sach-bang-quang-cao",
+    href: "/danh-sach-loai-bang-quang-cao",
     icon: "bi bi-layout-split",
   },
   // {

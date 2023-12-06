@@ -10,91 +10,91 @@ import {
 import Loader from "../../layouts/loader/Loader";
 import { axiosService } from "../../services/axiosServices";
 
+// import Pagination from "../../components/Pagination";
+// import ConfirmModal from "../../components/ModalConfirm/ModalConfirm";
 
 const Advertisement = () => {
-  const [advertisement, setAdvertisement] = useState([]);
+  const [spaces, setSpaces] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // const [isOpenModal, setIsOpenModal] = useState(null);
+  // const [currentPage, setCurrentPage] = useState(1);
+
+  // const [meta, setMeta] = useState({
+  //   next: null,
+  //   prev_page: null,
+  //   total_count: null,
+  //   total_pages: null,
+  // });
 
   const getAdvertisements = async () => {
     try {
-      const { data } = await axiosService.get("/advertisement");
+      const { data } = await axiosService.get(`/spaces`);
       return data;
     } catch (error) {
       throw (error);
     }
   };
 
-  const handleDelete = async (advertisementId) => {
-    try {
-      const { data, status } = await axiosService.delete(`/advertisement/${advertisementId}`);
-      if (status === 200) {
-        alert("Bạn có muốn xoá quảng cáo này?")
-        const newAdvertisement = advertisement.filter((item) => item.advertisementId !== advertisementId);
-        setAdvertisement(newAdvertisement);
-      }
-      return data;
-    } catch (error) {
-      throw (error);
-    }
-  }
+  // const handleToggle = () => {
+  //   setIsOpenModal(null)
+  // }
+
+  // const handleDelete = async () => {
+  //   try {
+  //     const { data, status } = await axiosService.delete(`/advertisements/${isOpenModal}`);
+  //     if (status === 204 || status === 200) {
+  //       const newAdvertisement = setSpaces.filter((item) => item.id !== isOpenModal);
+  //       setSpaces(newAdvertisement);
+  //       handleToggle();
+  //     }
+  //     return data;
+  //   } catch (error) {
+  //     throw (error);
+  //   }
+  // }
 
   useEffect(() => {
     setIsLoading(true);
     getAdvertisements().then((data) => {
-      setAdvertisement(data.data)
+      setSpaces(data.data)
       setIsLoading(false);
     });
   }, []);
-
   return (
     <div>
       <Card>
         <CardBody>
-          <Link to="/them-bang-quang-cao">
-            <Button color="primary" className="mb-3">
-              <i class="bi bi-plus-circle"></i> &nbsp;
-              Thêm bảng quảng cáo
-            </Button>
-          </Link>
-
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
-                <th>Tiêu đề</th>
-                <th>Mô tả</th>
-                <th>Giá tiền</th>
-                <th>Ngày bắt đầu | Ngày kết thúc</th>
-                <th>Chiều dài | Chiều rộng</th>
-                <th>Hiển thị</th>
+                <th>Address</th>
+                <th>format</th>
+                <th>long</th>
+                <th>lat</th>
+                <th>type</th>
+                <th>ward</th>
                 <th>Chức năng</th>
               </tr>
             </thead>
             <tbody>
               {isLoading ? <Loader />
-                : advertisement.map((ad, index) => (
+                : spaces.map((ad, index) => (
                   <tr key={index} className="border-top">
                     <td>
                       <div className="d-flex align-items-center p-2">
                         <div className="">
-                          <span className="text-muted">{ad.title}</span>
+                          <span className="text-muted">{ad?.address}</span>
                         </div>
                       </div>
                     </td>
-                    <td className="d-inline-block text-truncate">{ad.description}</td>
+                    <td className="d-inline-block text-truncate">{ad.format}</td>
+                    <td className="text-center">{ad.long}</td>
+                    <td className="text-center">{ad.lat}</td>
+                    <td className="text-center">{ad.type_space}</td>
+                    <td className="text-center">{ad.ward}</td>
 
-                    <td>{ad.price}</td>
-                    <td className="text-center">{moment(ad.startDate).format("DD-MM-yyyy")} | {moment(ad.endDate).format("DD-MM-yyyy")}</td>
-                    <td className="text-center">{ad.width} | {ad.height}</td>
-                    <td>
-                      {ad.isActive == 0 ? (
-                        <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>
-                      ) : (
-                        <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
-                      )}
-                    </td>
                     <td className="d-flex justify-content-around">
-                      <Link to={`/sua-bang-quang-cao/${ad.advertisementId}`}><Button color="warning" size="sm">Sửa</Button></Link>
-                      <Button color="danger" size="sm" onClick={() => handleDelete(ad.advertisementId)}>Xoá</Button>
+                      <Link to={`/danh-sach-bang-quang-cao/${ad.id}`}><Button color="warning" size="sm">View surface</Button></Link>
                     </td>
                   </tr>
                 ))}
@@ -102,6 +102,8 @@ const Advertisement = () => {
           </Table>
         </CardBody>
       </Card>
+     {/* <Pagination meta={meta} setCurrentPage={setCurrentPage} currentPage={currentPage}/> */}
+      {/* {isOpenModal && <ConfirmModal isOpen={isOpenModal} toggle={() => handleToggle} handleDelete={() => handleDelete} />} */}
     </div>
   );
 };
