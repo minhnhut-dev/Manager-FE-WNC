@@ -1,5 +1,5 @@
-import { Card, CardBody, CardSubtitle, CardTitle, Row, Col } from "reactstrap";
-import Chart from "react-apexcharts";
+import { Card, CardBody, CardTitle, Row } from "reactstrap";
+import Map from "./Map";
 
 const SalesChart = () => {
   const options = {
@@ -69,27 +69,12 @@ const SalesChart = () => {
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h5">Sales Summary</CardTitle>
-        <CardSubtitle className="text-muted" tag="h6">
-          Yearly Sales Report
-        </CardSubtitle>
-        <div className="bg-primary text-white my-3 p-3 rounded">
+        <CardTitle tag="h4" className="fw-bold">Bản đồ danh sách các điểm quảng cáo</CardTitle>
+        <div className="text-white my-3 p-3 rounded">
           <Row>
-            <Col md="4">
-              <h6>Total Sales</h6>
-              <h4 className="mb-0 fw-bold">$10,345</h4>
-            </Col>
-            <Col md="4">
-              <h6>This Month</h6>
-              <h4 className="mb-0 fw-bold">$7,545</h4>
-            </Col>
-            <Col md="4">
-              <h6>This Week</h6>
-              <h4 className="mb-0 fw-bold">$1,345</h4>
-            </Col>
+            <Map />
           </Row>
         </div>
-        <Chart options={options} series={series} type="area" height="279" />
       </CardBody>
     </Card>
   );

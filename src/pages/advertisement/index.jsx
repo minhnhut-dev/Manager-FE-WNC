@@ -35,24 +35,6 @@ const Advertisement = () => {
     }
   };
 
-  // const handleToggle = () => {
-  //   setIsOpenModal(null)
-  // }
-
-  // const handleDelete = async () => {
-  //   try {
-  //     const { data, status } = await axiosService.delete(`/advertisements/${isOpenModal}`);
-  //     if (status === 204 || status === 200) {
-  //       const newAdvertisement = setSpaces.filter((item) => item.id !== isOpenModal);
-  //       setSpaces(newAdvertisement);
-  //       handleToggle();
-  //     }
-  //     return data;
-  //   } catch (error) {
-  //     throw (error);
-  //   }
-  // }
-
   useEffect(() => {
     setIsLoading(true);
     getAdvertisements().then((data) => {

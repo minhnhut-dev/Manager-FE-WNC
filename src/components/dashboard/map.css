@@ -1,0 +1,27 @@
+.mapboxgl-ctrl-geocoder {
+  border: 0;
+  border-radius: 0;
+  position: relative;
+  top: 0;
+  width: 800px;
+  margin-top: 0;
+}
+
+.mapboxgl-ctrl-geocoder > div {
+  min-width: 100%;
+  margin-left: 0;
+}
+
+.mapboxgl-popup-content {
+  background-color: #CCF4C9;
+}
+
+.mapboxgl-popup-content {
+  max-width: 500px;
+  min-width: 300px;
+  
+}
+#map {
+  width: 100%;
+  height: 500px;
+}

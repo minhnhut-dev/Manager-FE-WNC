@@ -2,7 +2,8 @@ import {
   Button,
   Card,
   CardBody,
-  Table
+  Table,
+  CardTitle
 } from "reactstrap";
 import user1 from "../../assets/images/users/user1.jpg";
 import user2 from "../../assets/images/users/user2.jpg";
@@ -64,15 +65,7 @@ const ProjectTables = () => {
     <div>
       <Card>
         <CardBody>
-          <Link to="/them-bang-quang-cao">
-
-            <Button color="primary" className="mb-3">
-              <i class="bi bi-plus-circle"></i> &nbsp;
-              Thêm bảng quảng cáo
-
-            </Button>
-          </Link>
-
+        <CardTitle tag="h4" className="fw-bold">Danh sách báo cáo người dân</CardTitle>
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>

@@ -3,55 +3,20 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
   {
-    title: "Dashboard",
+    title: "Trang chủ",
     href: "/starter",
     icon: "bi bi-speedometer2",
   },
   {
-    title: "Bảng quảng cáo",
+    title: "Danh sách bảng quảng cáo",
     href: "/danh-sach-loai-bang-quang-cao",
     icon: "bi bi-layout-split",
   },
-  // {
-  //   title: "Alert",
-  //   href: "/alerts",
-  //   icon: "bi bi-bell",
-  // },
-  // {
-  //   title: "Badges",
-  //   href: "/badges",
-  //   icon: "bi bi-patch-check",
-  // },
-  // {
-  //   title: "Buttons",
-  //   href: "/buttons",
-  //   icon: "bi bi-hdd-stack",
-  // },
-  // {
-  //   title: "Cards",
-  //   href: "/cards",
-  //   icon: "bi bi-card-text",
-  // },
-  // {
-  //   title: "Grid",
-  //   href: "/grid",
-  //   icon: "bi bi-columns",
-  // },
-  // {
-  //   title: "Forms",
-  //   href: "/forms",
-  //   icon: "bi bi-textarea-resize",
-  // },
-  // {
-  //   title: "Breadcrumbs",
-  //   href: "/breadcrumbs",
-  //   icon: "bi bi-link",
-  // },
-  // {
-  //   title: "About",
-  //   href: "/about",
-  //   icon: "bi bi-people",
-  // },
+  {
+    title: "Danh sách báo cáo",
+    href: "/danh-sach-bao-cao",
+    icon: "bi bi-card-text",
+  },
 ];
 
 const Sidebar = () => {
@@ -79,8 +44,8 @@ const Sidebar = () => {
                 to={navi.href}
                 className={
                   location.pathname === navi.href
-                    ? "active nav-link py-3"
-                    : "nav-link py-3"
+                    ? "active nav-link py-3  d-flex"
+                    : "nav-link py-3  d-flex"
                 }
               >
                 <i className={navi.icon}></i>
