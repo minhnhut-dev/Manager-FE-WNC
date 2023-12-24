@@ -1,8 +1,8 @@
 import { Col, Row } from "reactstrap";
+import ReportSpaces from "../components/dashboard/ReportSpaces";
 import SalesChart from "../components/dashboard/SalesChart";
-import Map from "../components/dashboard/Map";
-import ProjectTables from "../components/dashboard/ProjectTable";
 
+import ReportSurfaces from "../components/dashboard/ReportSurfaces";
 
 const Starter = () => {
   return (
@@ -11,9 +11,13 @@ const Starter = () => {
         <Col md={12} sm="12" lg="6" xl="12" xxl="12" >
           <SalesChart />
         </Col>
+        {/* <Col md={12} sm="12" lg="6" xl="12" xxl="12" >
+           <ReportSurfaces />
+        </Col> */}
         <Col md={12} sm="12" lg="6" xl="12" xxl="12" >
-           <ProjectTables />
+           <ReportSpaces />
         </Col>
+       
       </Row>
     </div>
   );
