@@ -1,78 +1,47 @@
 import { Card, CardBody, CardTitle, Row } from "reactstrap";
 import Map from "./Map";
+import Select from "../Select";
+import {useEffect, useState} from "react";
+import {axiosService} from "../../services/axiosServices";
+import {user_info} from "../../utils/mock/user";
 
 const SalesChart = () => {
-  const options = {
-    chart: {
-      toolbar: {
-        show: false,
-      },
-      stacked: false,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 4,
-      colors: ["transparent"],
-    },
-    legend: {
-      show: true,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "30%",
-        borderRadius: 2,
-      },
-    },
-    colors: ["#0d6efd", "#009efb", "#6771dc"],
-    xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-      ],
-    },
-    responsive: [
-      {
-        breakpoint: 1024,
-        options: {
-          plotOptions: {
-            bar: {
-              columnWidth: "60%",
-              borderRadius: 7,
-            },
-          },
-        },
-      },
-    ],
-  };
-  const series = [
-    {
-      name: "2020",
-      data: [20, 40, 50, 30, 40, 50, 30, 30, 40],
-    },
-    {
-      name: "2022",
-      data: [10, 20, 40, 60, 20, 40, 50, 60, 20],
-    },
-  ];
+  const [optionsId, setOptionsId] = useState(null);
+  const [map, setMap] = useState(null);
+
+  const loadSpacesByDistrict = async (optionsId) => {
+    if(optionsId == null) {
+      const {data} = await axiosService.get(`/spaces/area?district=${user_info.district.id}`);
+      return data;
+    }else {
+      const {data} = await axiosService.get(`/spaces/area?ward=${optionsId}`);
+      return data;
+    }
+
+  }
+
+  useEffect(() => {
+    if(user_info.role === "DISTRICT_MANAGER"){
+      loadSpacesByDistrict(optionsId).then((data) => {
+        setMap(data);
+      })
+    }
+  }, [optionsId]);
+  console.log("map", map);
 
   return (
     <Card>
       <CardBody>
         <CardTitle tag="h4" className="fw-bold">Bản đồ danh sách các điểm quảng cáo</CardTitle>
+        <div className="row">
+          <div className="col-md-3">
+            <span>Chọn</span>
+            <Select setOptionsId={setOptionsId}/>
+          </div>
+        </div>
         <div className="text-white my-3 p-3 rounded">
           <Row>
-            <Map />
+            {map && <Map geoJSon = {map} optionsId={ optionsId}/> }
           </Row>
         </div>
       </CardBody>

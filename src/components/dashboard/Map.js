@@ -1,30 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { geoJson } from '../../utils/mock/geoJson';
 import {MAPBOX_ACCESS_TOKEN} from '../../utils/config';
 import "./map.css";
-
-function Map() {
-  console.log("Load map")
+import {formatGeoJson} from '../../services/formatGeoJSON';
+function Map({optionsId, geoJSon}) {
   mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
   const mapContainerRef = useRef(null);
-
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [ 106.7008, 10.7769],
+      center: [106.729619, 10.738284],
       maxZoom: 20,
-      zoom: 18,
-
+      zoom: 12,
     });
+
     map.on("load", () => {
       map.addSource('places', {
         'type': 'geojson',
-        'data': geoJson
+        'data': formatGeoJson(geoJSon)
       });
 
       map.addLayer({
@@ -68,7 +66,7 @@ function Map() {
         map.getCanvas().style.cursor = '';
       });
     })
-  }, []);
+  }, [optionsId, geoJSon]);
 
   return (
     <div id="map" ref={mapContainerRef} />
