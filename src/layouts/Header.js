@@ -13,8 +13,13 @@ import {
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 import user1 from "../assets/images/users/user4.jpg";
 import Logo from "./Logo";
-
+import useLocalStorageUser from '../hooks/useLocalStorageUser'
+import AppContext from "../Context/appContext";
+import {useNavigate} from "react-router-dom";
 const Header = () => {
+   const navigate = useNavigate();
+  const {setCurrentUser} = React.useContext(AppContext);
+  const [user, setUser] = useLocalStorageUser("manager-spaces", null); // eslint-disable-line no-unused-vars
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
@@ -26,6 +31,13 @@ const Header = () => {
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
+
+  const handleLogout = () => {
+    setUser({})
+    setCurrentUser(null);
+    navigate("/login");
+  }
+
   return (
     <Navbar color="white" light expand="md" className="fix-header">
       <div className="d-flex align-items-center">
@@ -73,12 +85,9 @@ const Header = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
+             <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

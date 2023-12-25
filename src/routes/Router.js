@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Surface from "../pages/Surface/index.jsx";
 import Report from "../pages/Report/index.jsx";
+import LoginPage from "../pages/Login/index";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -46,6 +47,7 @@ const ThemeRoutes = [
     ],
   },
   { path: "*", element: <NotFound /> },
+    { path: "/login", element: <LoginPage /> },
 ];
 
 export default ThemeRoutes;

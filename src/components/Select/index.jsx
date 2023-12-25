@@ -1,17 +1,10 @@
 import React, {useEffect} from 'react';
 import {Form, FormGroup, Input} from "reactstrap";
-import * as PropTypes from "prop-types";
 import {user_info} from "../../utils/mock/user";
 import {axiosService} from "../../services/axiosServices";
-import {geoJson} from "../../utils/mock/geoJson";
 
 function Select({setOptionsId}) {
     const [listOptions, setListOptions] = React.useState([]);
-
-    const handleLoadSpaceByOptions = async (optionsId) => {
-        setOptionsId(optionsId);
-
-    }
 
     const handleFetchListOptions = async () => {
         if(user_info.role === 'DISTRICT_MANAGER'){
@@ -47,12 +40,12 @@ function Select({setOptionsId}) {
             <Form>
                 <FormGroup>
                     <Input
-                        id="exampleSelect"
+                        id="select-ward"
                         name="select"
                         type="select"
                         onChange={ (e) => setOptionsId(e.target.value)}
                     >
-                        <option>Tất cả</option>
+                        <option value={""}>Tất cả</option>
                         { listOptions && renderOptions()}
                     </Input>
                 </FormGroup>
