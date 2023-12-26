@@ -1,25 +1,29 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
-
-const navigation = [
-  {
-    title: "Trang chủ",
-    href: "/starter",
-    icon: "bi bi-speedometer2",
-  },
-  {
-    title: "Danh sách bảng quảng cáo",
-    href: "/danh-sach-loai-bang-quang-cao",
-    icon: "bi bi-layout-split",
-  },
-  {
-    title: "Danh sách báo cáo",
-    href: "/danh-sach-bao-cao",
-    icon: "bi bi-card-text",
-  },
-];
+import AppContext from "../Context/appContext";
+import {UserRole} from "../constanst";
+import {useContext} from "react";
 
 const Sidebar = () => {
+  const {currentUser} = useContext(AppContext);
+  const navigation = [
+    {
+      title: `${UserRole[currentUser?.role] }` ,
+      href: "/starter",
+      icon: "bi bi-speedometer2",
+    },
+    {
+      title: "Danh sách bảng quảng cáo",
+      href: "/danh-sach-loai-bang-quang-cao",
+      icon: "bi bi-layout-split",
+    },
+    {
+      title: "Danh sách báo cáo",
+      href: "/danh-sach-bao-cao",
+      icon: "bi bi-card-text",
+    },
+  ];
+
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };

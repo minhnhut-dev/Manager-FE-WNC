@@ -13,7 +13,7 @@ const LoginPage = () => {
     // Yup validation schema
     const validationSchema = Yup.object().shape({
         userName: Yup.string()
-            .required('Email is required'),
+            .required('Username is required'),
         password: Yup.string()
             .min(5, 'Password must be at least 6 characters')
             .required('Password is required'),
@@ -32,14 +32,15 @@ const LoginPage = () => {
                 setUser(data);
                 setCurrentUser(data)
             }
+            setTimeout(() => {
+                setSubmitting(false); // Reset the submitting state
+                navigate('/');
+                // Optionally, navigate to another page or show a success message
+            }, 1500);
         }catch (e) {
             console.log(e)
         }
-        setTimeout(() => {
-            setSubmitting(false); // Reset the submitting state
-            navigate('/');
-            // Optionally, navigate to another page or show a success message
-        }, 1500);
+
     };
 
     return (

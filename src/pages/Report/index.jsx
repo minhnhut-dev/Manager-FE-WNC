@@ -18,7 +18,6 @@ import * as yup from "yup";
 
 import { axiosService } from "../../services/axiosServices";
 import { useNavigate, useParams } from "react-router-dom";
-import moment from "moment";
 
 const Report = ({ isEdit }) => {
 
@@ -273,22 +272,6 @@ const Report = ({ isEdit }) => {
                     </Col>
                   </Col>
                   <Col md={12}>
-                    {/* {isEdit ? (<Button
-                      color="success"
-                      style={{ marginLeft: "40%" }}
-                      type="submit"
-                      disabled={formik.isSubmitting}
-                    >
-                      Sửa bảng quảng cáo
-                    </Button>) : <Button
-                      color="success"
-                      style={{ marginLeft: "40%" }}
-                      type="submit"
-                      disabled={formik.isSubmitting}
-                    >
-                      Thêm bảng quảng cáo
-                    </Button>} */}
-
                   <Button
                       color="success"
                       style={{ marginLeft: "40%" }}

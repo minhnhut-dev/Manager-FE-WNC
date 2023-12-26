@@ -3,7 +3,7 @@ import {Form, FormGroup, Input} from "reactstrap";
 import {user_info} from "../../utils/mock/user";
 import {axiosService} from "../../services/axiosServices";
 
-function Select({setOptionsId}) {
+function Select({setOptionsId, current_user}) {
     const [listOptions, setListOptions] = React.useState([]);
 
     const handleFetchListOptions = async () => {
@@ -34,6 +34,7 @@ function Select({setOptionsId}) {
             })
         )
     }
+
 
     return (
         <>

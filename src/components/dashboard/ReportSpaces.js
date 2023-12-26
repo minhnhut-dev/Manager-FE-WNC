@@ -1,36 +1,42 @@
-import { Button, Card, CardBody, Table, CardTitle } from "reactstrap";
-import user1 from "../../assets/images/users/user1.jpg";
-import user2 from "../../assets/images/users/user2.jpg";
-import user3 from "../../assets/images/users/user3.jpg";
-import user4 from "../../assets/images/users/user4.jpg";
-import user5 from "../../assets/images/users/user5.jpg";
-import { Link } from "react-router-dom";
+import { Card, CardBody, Table, CardTitle } from "reactstrap";
 import { useEffect, useState } from "react";
 import { axiosService } from "../../services/axiosServices";
 import { API_URL, fixUrl} from "../../constanst";
 
-const ReportSpaces = () => {
+const ReportSpaces = ({current_user}) => {
   const [listReportSpaces, setListReportSpaces] = useState([]);
 
-  const handleLoadReportSpaces = async () => {
-    const response = await axiosService.get("/reports-space");
-    const { data } = response;
+  // const handleLoadReportSpaces = async () => {
+  //   const response = await axiosService.get("/reports-space");
+  //   const { data } = response;
+  //   return data;
+  // };
+  const loadReportSpacesByWard = async () => {
+    const {data} = await axiosService.get(`/reports-space/area?ward=${current_user?.ward?.id}`);
     return data;
-  };
-
+  }
   useEffect(() => {
-    handleLoadReportSpaces().then((data) => {
-      setListReportSpaces(data);
-    });
+    // handleLoadReportSpaces().then((data) => {
+    //   setListReportSpaces(data);
+    // });
+
+    if(current_user?.role === "DISTRICT_MANAGER"){
+      // loadSpacesByDistrict(optionsId).then((data) => {
+      //   setMap(data);
+      // })
+    }else if(current_user?.role === "WARD_MANAGER"){
+      loadReportSpacesByWard().then(data => {
+        setListReportSpaces(data);
+      })
+    }
   }, []);
 
-  console.log(listReportSpaces);
   return (
     <div>
       <Card>
         <CardBody>
           <CardTitle tag="h4" className="fw-bold">
-            Danh sách báo cáo quảng cáo người dân
+            Danh sách báo cáo địa điểm
           </CardTitle>
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
