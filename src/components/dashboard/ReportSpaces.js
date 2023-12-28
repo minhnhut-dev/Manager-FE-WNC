@@ -76,6 +76,7 @@ const ReportSpaces = ({current_user}) => {
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
+
                 </tr>
               ))}
             </tbody>

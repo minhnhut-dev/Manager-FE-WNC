@@ -1,14 +1,17 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Surface from "../pages/Surface/index.jsx";
-import Report from "../pages/Report/index.jsx";
+import Report from "../pages/ReportSpaces/index.jsx";
 import LoginPage from "../pages/Login/index";
+import ReportSpaces from "../pages/ReportSpaces/index.jsx";
+import RequestReportSpaces from "../pages/RequestReportSpaces";
+import ListReportSpacesByUser from "../pages/Department/ListReportSpacesFromUser";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
-
+const AddRequestFormReportById = lazy(() => import("../pages/RequestReportSpaces/index"));
 const Starter = lazy(() => import("../views/Starter.js"));
 const Advertisement = lazy(() => import("../pages/advertisement/index"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
@@ -25,25 +28,22 @@ const ThemeRoutes = [
       { path: "/", element: <Navigate to="/starter" /> },
       { path: "/starter", exact: true, element: <Starter /> },
       {
-        path: "/danh-sach-loai-bang-quang-cao",
+        path: "/danh-sach-bao-cao-dia-diem",
         exact: true,
-        element: <Advertisement />,
+        element: < ReportSpaces/>,
       },
       {
-        path: "/danh-sach-bang-quang-cao/:spaceId",
+        path: "/them-yeu-cau-chinh-sua-dia-diem/:spacesId",
         exact: true,
-        element: <Surface />,
+        element: < RequestReportSpaces/>,
       },
+
       {
-        path: "/them-bao-cao-quang-cao/:surfaceId",
+        path: "/abc",
         exact: true,
-        element: <Report />,
-      },
-      {
-        path: "/sua-bang-quang-cao/:AdvertisementId",
-        exact: true,
-        element: <AddEditAdvertisement isEdit={true} />,
-      },
+        element: < ListReportSpacesByUser/>,
+      }
+
     ],
   },
   { path: "*", element: <NotFound /> },
