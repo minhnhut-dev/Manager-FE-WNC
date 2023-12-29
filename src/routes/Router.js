@@ -6,6 +6,10 @@ import LoginPage from "../pages/Login/index";
 import ReportSpaces from "../pages/ReportSpaces/index.jsx";
 import RequestReportSpaces from "../pages/RequestReportSpaces";
 import ListReportSpacesByUser from "../pages/Department/ListReportSpacesFromUser";
+import ManageWardDistrict from "../pages/Department/ManageWardDistrict";
+import ManageAllTypesOfForms from "../pages/Department/ManageAllTypesOfForms";
+import ManageSpace from "../pages/Department/ManageSpace";
+import EditSpace from "../pages/Department/ManageSpace/EditSpace";
 import EditProfile from "../pages/EditProfile";
 import ForgotPassword from "../pages/ForgotPassword";
 
@@ -55,10 +59,32 @@ const ThemeRoutes = [
         exact: true,
         element: <ForgotPassword />
       },
-    ],
-  },
+
+      {
+        path: "/quang-ly-quan-phuong",
+        exact: true,
+        element: < ManageWardDistrict />,
+      },
+      {
+        path: "/quang-ly-cac-loai-hinh-thuc",
+        exact: true,
+        element: < ManageAllTypesOfForms />,
+      },
+      {
+        path: "/quang-ly-diem-dat-quang-cao",
+        exact: true,
+        element: < ManageSpace />,
+      },
+      {
+        path: "/chinh-sua-diem-dat-quang-cao/:spacesId",
+        exact: true,
+        element: < EditSpace/>,
+      }
+        ]
+    },
   { path: "*", element: <NotFound /> },
-    { path: "/login", element: <LoginPage /> },
+
+  { path: "/login", element: <LoginPage /> }
 ];
 
 export default ThemeRoutes;
