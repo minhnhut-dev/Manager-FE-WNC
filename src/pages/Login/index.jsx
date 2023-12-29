@@ -1,14 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import useLocalStorageUser from "../../hooks/useLocalStorageUser";
 import {axiosService} from "../../services/axiosServices";
 import AppContext from "../../Context/appContext";
 import {useNavigate} from "react-router-dom";
+import {Button} from "reactstrap";
+import ModalSendOTP from "./ModalSendOTP";
 const LoginPage = () => {
     const navigate = useNavigate()
     const {setCurrentUser}  = useContext(AppContext)
     const [user, setUser] = useLocalStorageUser('manager-spaces', {});
+    const [modalSendOTP, setModalSendOTP] = useState(false);
+    const toggle = () => setModalSendOTP(!modalSendOTP);
 
     // Yup validation schema
     const validationSchema = Yup.object().shape({
@@ -72,6 +76,9 @@ const LoginPage = () => {
                                                 <button type="submit" className="btn btn-success btn-lg w-100 mt-4" disabled={isSubmitting}>
                                                     Login
                                                 </button>
+                                                <Button color="link" type={"button"} onClick={() => setModalSendOTP(!modalSendOTP)}>
+                                                    Quên mật khẩu?
+                                                </Button>
                                             </Form>
                                         )}
                                     </Formik>
@@ -81,6 +88,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
+            <ModalSendOTP toggle={toggle} isOpen={modalSendOTP}/>
         </>
     );
 };

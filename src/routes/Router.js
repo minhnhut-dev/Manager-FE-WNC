@@ -10,6 +10,8 @@ import ManageWardDistrict from "../pages/Department/ManageWardDistrict";
 import ManageAllTypesOfForms from "../pages/Department/ManageAllTypesOfForms";
 import ManageSpace from "../pages/Department/ManageSpace";
 import EditSpace from "../pages/Department/ManageSpace/EditSpace";
+import EditProfile from "../pages/EditProfile";
+import ForgotPassword from "../pages/ForgotPassword";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -43,10 +45,21 @@ const ThemeRoutes = [
       },
 
       {
-        path: "/abc",
+        path: "/danh-sach-yeu-cau-chinh-sua",
         exact: true,
         element: < ListReportSpacesByUser/>,
       },
+      {
+        path: "/chinh-sua-thong-tin-ca-nhan",
+        exact: true,
+        element: <EditProfile />
+      },
+      {
+        path: "/quen-mat-khau",
+        exact: true,
+        element: <ForgotPassword />
+      },
+
       {
         path: "/quang-ly-quan-phuong",
         exact: true,
@@ -66,12 +79,12 @@ const ThemeRoutes = [
         path: "/chinh-sua-diem-dat-quang-cao/:spacesId",
         exact: true,
         element: < EditSpace/>,
-      },
-
-    ],
-  },
+      }
+        ]
+    },
   { path: "*", element: <NotFound /> },
-    { path: "/login", element: <LoginPage /> },
+
+  { path: "/login", element: <LoginPage /> }
 ];
 
 export default ThemeRoutes;

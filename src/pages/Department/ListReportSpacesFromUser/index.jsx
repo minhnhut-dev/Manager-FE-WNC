@@ -3,10 +3,8 @@ import {Card, CardBody, CardTitle, Container, Table} from "reactstrap";
 import {
     API_URL,
     fixUrl,
-    getReportState,
-    getReportStateColor,
     getRequestStateColor,
-    getRequestStateName
+    getRequestStateName, hiddenActionDeleteByReportState, hiidenActionAcceptByRequestState
 } from "../../../constanst";
 import {axiosService} from "../../../services/axiosServices";
 import Swal from "sweetalert2";
@@ -19,7 +17,7 @@ const ListReportSpacesByUser = () => {
         return data;
     }
 
-    const acceptReportSpaces = async (reportId) => {
+    const acceptRequestSpaces = async (reportId) => {
         try {
             const response = await axiosService.post(`/request-space/send-email/${reportId}`);
             return response;
@@ -27,7 +25,53 @@ const ListReportSpacesByUser = () => {
             console.error('Error deleting report space:', error);
             throw error;
         }
+    }
 
+    const declineRequestSpaces = async (reportId) => {
+        try {
+            const response = await axiosService.post(`/request-space/decline/${reportId}`);
+            return response;
+        } catch (error) {
+            console.error('Error deleting report space:', error);
+            throw error;
+        }
+    }
+
+    const handleDeclineRequestSpaces = (reportId) => {
+        Swal.fire({
+            title: 'Bạn có muốn từ chối?',
+            text: 'Bạn có muốn từ chối yêu cầu này!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Từ chối'
+        }).then((result) => {
+            if(result.isConfirmed) {
+                declineRequestSpaces(reportId).then((data) => {
+                    if(data.status === 200 ||  data.status === 201){
+                        Swal.fire({
+                            icon: "success",
+                            title: "Từ chối thành công",
+                        });
+                        let newListReportSpaces = listReportSpaces.map(item => {
+                            if(item.id === reportId){
+                                item.state = 'Declined';
+                            }
+                            return item;
+                        });
+                        setListReportSpaces((newListReportSpaces));
+                    }else{
+                        Swal.fire({
+                            icon: "error",
+                            title: "Từ chối thất bại",
+                        });
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
+        })
     }
 
     const handleAcceptReportSpaces = (reportId) => {
@@ -41,7 +85,7 @@ const ListReportSpacesByUser = () => {
             confirmButtonText: 'Chấp nhận'
         }).then((result) => {
             if(result.isConfirmed) {
-                acceptReportSpaces(reportId).then((data) => {
+                acceptRequestSpaces(reportId).then((data) => {
                     if(data.status === 200 ||  data.status === 201){
                         Swal.fire({
                             icon: "success",
@@ -49,7 +93,7 @@ const ListReportSpacesByUser = () => {
                         });
                         let newListReportSpaces = listReportSpaces.map(item => {
                             if(item.id === reportId){
-                                item.state = data.data.state;
+                                item.state = 'Accepted';
                             }
                             return item;
                         });
@@ -118,10 +162,13 @@ const ListReportSpacesByUser = () => {
                                        <span
                                            className={`p-2 text-white bg-${getRequestStateColor(tdata?.state)} d-inline-block ms-3`}>{getRequestStateName(tdata?.state)}</span>
                                    </td>
-                                   <td>
-                                       <button className="btn btn-success btn-sm" onClick={() => handleAcceptReportSpaces(tdata?.id)}><i className='bi bi-check'></i></button>
-                                       <button className="btn btn-danger btn-sm"><i className='bi bi-x'></i>
-                                       </button>
+                                   <td className={"d-flex gap-1 mt-2"}>
+                                       {hiidenActionAcceptByRequestState(tdata?.state) ? <div></div> :
+                                        <button className="btn btn-success btn-sm" onClick={() => handleAcceptReportSpaces(tdata?.id)}><i className='bi bi-check'></i></button>
+                                       }
+                                       {hiddenActionDeleteByReportState(tdata?.state) ? <div></div> :
+                                           <button className="btn btn-danger btn-sm" onClick={() => handleDeclineRequestSpaces(tdata?.id)}><i className='bi bi-x'></i></button>
+                                       }
                                    </td>
                                </tr>
                            ))}

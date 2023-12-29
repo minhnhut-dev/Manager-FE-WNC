@@ -85,7 +85,7 @@ const Header = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
+            <DropdownItem tag={"a"} href="/chinh-sua-thong-tin-ca-nhan">Edit Profile</DropdownItem>
             <DropdownItem divider />
              <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
           </DropdownMenu>
