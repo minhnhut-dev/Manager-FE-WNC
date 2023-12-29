@@ -108,6 +108,33 @@ function hiddenActionDeleteByReportState(state) {
         return true;
     }
 }
+
+function hiidenActionAcceptByRequestState(state) {
+    switch(state) {
+        case RequestState.ACCEPTED:
+            return true;
+        case RequestState.DECLINED:
+            return true;
+        case ReportState.PENDING:
+            return false;
+        default:
+            return true;
+    }
+}
+
+function hiidenActionDeleteByRequestState(state) {
+    switch(state) {
+        case RequestState.ACCEPTED:
+            return true;
+        case RequestState.DECLINED:
+            return true;
+        case ReportState.PENDING:
+            return false;
+        default:
+            return true;
+    }
+}
+
 function translateByUserRole(userRole) {
   switch(userRole) {
     case UserRole.WARD_MANAGER:
@@ -121,4 +148,4 @@ function translateByUserRole(userRole) {
   }
 }
 
-export { API_URL, fixUrl, UserRole, getReportState, getReportStateColor, translateByUserRole, hiddenActionEditByReportState, hiddenActionDeleteByReportState, getRequestStateColor, getRequestStateName};
+export { API_URL, fixUrl, UserRole, getReportState, getReportStateColor, translateByUserRole, hiddenActionEditByReportState, hiddenActionDeleteByReportState, getRequestStateColor, getRequestStateName, hiidenActionAcceptByRequestState, hiidenActionDeleteByRequestState};

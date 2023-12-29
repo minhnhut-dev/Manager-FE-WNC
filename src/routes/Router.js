@@ -6,6 +6,8 @@ import LoginPage from "../pages/Login/index";
 import ReportSpaces from "../pages/ReportSpaces/index.jsx";
 import RequestReportSpaces from "../pages/RequestReportSpaces";
 import ListReportSpacesByUser from "../pages/Department/ListReportSpacesFromUser";
+import EditProfile from "../pages/EditProfile";
+import ForgotPassword from "../pages/ForgotPassword";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -39,11 +41,20 @@ const ThemeRoutes = [
       },
 
       {
-        path: "/abc",
+        path: "/danh-sach-yeu-cau-chinh-sua",
         exact: true,
         element: < ListReportSpacesByUser/>,
-      }
-
+      },
+      {
+        path: "/chinh-sua-thong-tin-ca-nhan",
+        exact: true,
+        element: <EditProfile />
+      },
+      {
+        path: "/quen-mat-khau",
+        exact: true,
+        element: <ForgotPassword />
+      },
     ],
   },
   { path: "*", element: <NotFound /> },

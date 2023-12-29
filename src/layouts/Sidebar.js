@@ -7,9 +7,7 @@ import {useContext} from "react";
 const Sidebar = () => {
   const {currentUser} = useContext(AppContext);
 
-  const navigation = [
-
-  ];
+  const navigation = [];
 
   if(currentUser?.role === UserRole.DISTRICT_MANAGER || currentUser?.role === UserRole.WARD_MANAGER){
     navigation.push({
@@ -66,7 +64,7 @@ const Sidebar = () => {
         // },
         {
             title: "Xét duyệt báo cáo điểm đặt từ người dân",
-            href: "#",
+            href: "/danh-sach-yeu-cau-chinh-sua",
             icon: "bi bi-pencil-square",
         },
         // {
