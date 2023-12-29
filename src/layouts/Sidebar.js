@@ -34,21 +34,21 @@ const Sidebar = () => {
         })
   }else {
     navigation.push(
-        // {
-        //   title: "Quản lý danh sách Quận, Phường",
-        //   href: "#",
-        //   icon: "bi bi-geo-alt",
-        // },
-        // {
-        //   title: "Quản lý danh sách các loại hình quảng cáo, thức báo cáo",
-        //   href: "#",
-        //   icon: "bi bi-bar-chart-line",
-        // },
-        // {
-        //   title: "Quản lý các điểm đặt quảng cáo",
-        //   href: "#",
-        //   icon: "bi bi-map",
-        // },
+        {
+          title: "Quản lý danh sách Quận, Phường",
+          href: "/quang-ly-quan-phuong",
+          icon: "bi bi-geo-alt",
+        },
+        {
+          title: "Quản lý danh sách các loại hình quảng cáo, hình thức báo cáo",
+          href: "/quang-ly-cac-loai-hinh-thuc",
+          icon: "bi bi-bar-chart-line",
+        },
+        {
+          title: "Quản lý các điểm đặt quảng cáo",
+          href: "/quang-ly-diem-dat-quang-cao",
+          icon: "bi bi-map",
+        },
         // {
         //   title: "Quản lý các bảng quảng cáo",
         //   href: "#",

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000/';
+const API_URL = 'http://localhost:3000/';
  const  UserRole =  {
    WARD_MANAGER :'WARD_MANAGER',
    DISTRICT_MANAGER : 'DISTRICT_MANAGER',
