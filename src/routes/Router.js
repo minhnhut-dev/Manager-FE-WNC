@@ -12,6 +12,7 @@ import ManageSpace from "../pages/Department/ManageSpace";
 import EditSpace from "../pages/Department/ManageSpace/EditSpace";
 import EditProfile from "../pages/EditProfile";
 import ForgotPassword from "../pages/ForgotPassword";
+import ProtectedRoute from "../services/protectedRouter";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -24,6 +25,7 @@ const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 const AddEditAdvertisement = lazy(() =>
   import("../pages/AddEditAdvertisement/index")
 );
+
 /*****Routes******/
 
 const ThemeRoutes = [
@@ -32,7 +34,7 @@ const ThemeRoutes = [
     element: <FullLayout />,
     children: [
       { path: "/", element: <Navigate to="/starter" /> },
-      { path: "/starter", exact: true, element: <Starter /> },
+      { path: "/starter", exact: true, element: <ProtectedRoute><Starter /> </ProtectedRoute> },
       {
         path: "/danh-sach-bao-cao-dia-diem",
         exact: true,

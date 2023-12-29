@@ -17,7 +17,7 @@ const EditProfile = () => {
         phone: currentUser?.phone || '',
         email: currentUser?.email || '',
         role: currentUser?.role || '',
-        ward: currentUser?.ward?.id || '',
+        ward: currentUser?.ward?.id || null,
         district: currentUser?.district || null,
     };
 
