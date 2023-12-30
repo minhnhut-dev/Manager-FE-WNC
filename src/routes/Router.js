@@ -1,10 +1,10 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Surface from "../pages/Surface/index.jsx";
-import Report from "../pages/ReportSpaces/index.jsx";
+import Report from "../pages/WARD_DISTRICT/ReportSpaces/index.jsx";
 import LoginPage from "../pages/Login/index";
-import ReportSpaces from "../pages/ReportSpaces/index.jsx";
-import RequestReportSpaces from "../pages/RequestReportSpaces";
+import ReportSpaces from "../pages/WARD_DISTRICT/ReportSpaces/index.jsx";
+import RequestReportSpaces from "../pages/WARD_DISTRICT/RequestReportSpaces";
 import ListReportSpacesByUser from "../pages/Department/ListReportSpacesFromUser";
 import ManageWardDistrict from "../pages/Department/ManageWardDistrict";
 import ManageAllTypesOfForms from "../pages/Department/ManageAllTypesOfForms";
@@ -13,18 +13,16 @@ import EditSpace from "../pages/Department/ManageSpace/EditSpace";
 import EditProfile from "../pages/EditProfile";
 import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../services/protectedRouter";
+import ListReportSurface from "../pages/WARD_DISTRICT/ReportSurface/ListReportSurface";
+import AddRequestEditSurfaces from "../pages/WARD_DISTRICT/ReportSurface/AddRequestEditSurfaces";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
-const AddRequestFormReportById = lazy(() => import("../pages/RequestReportSpaces/index"));
+const AddRequestFormReportById = lazy(() => import("../pages/WARD_DISTRICT/RequestReportSpaces/index"));
 const Starter = lazy(() => import("../views/Starter.js"));
-const Advertisement = lazy(() => import("../pages/advertisement/index"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
-const AddEditAdvertisement = lazy(() =>
-  import("../pages/AddEditAdvertisement/index")
-);
 
 /*****Routes******/
 
@@ -39,6 +37,16 @@ const ThemeRoutes = [
         path: "/danh-sach-bao-cao-dia-diem",
         exact: true,
         element: < ReportSpaces/>,
+      },
+      {
+        path: "/danh-sach-bao-cao-bang-quang-cao",
+        exact: true,
+        element: < ListReportSurface/>,
+      },
+      {
+        path: "/them-yeu-cau-chinh-sua-bang-quang-cao/:surfaceId",
+        exact: true,
+        element: < AddRequestEditSurfaces/>,
       },
       {
         path: "/them-yeu-cau-chinh-sua-dia-diem/:spacesId",
@@ -81,8 +89,9 @@ const ThemeRoutes = [
         path: "/chinh-sua-diem-dat-quang-cao/:spacesId",
         exact: true,
         element: < EditSpace/>,
-      }
-        ]
+      },
+
+      ]
     },
   { path: "*", element: <NotFound /> },
 

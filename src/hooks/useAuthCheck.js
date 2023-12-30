@@ -8,7 +8,6 @@ const useAuthCheck = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (_.isEmpty(currentUser)) {
-            console.log("currentUser", currentUser)
             navigate('/login');
         }
     }, [currentUser, navigate]);

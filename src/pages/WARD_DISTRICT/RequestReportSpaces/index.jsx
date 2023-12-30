@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { Col, Row, Container, Card, CardImg, CardBody, CardTitle, CardText, FormGroup, Label, Input, Button } from 'reactstrap';
 import {useNavigate, useParams} from "react-router-dom";
-import {axiosService} from "../../services/axiosServices";
-import {API_URL, fixUrl} from "../../constanst";
+import {axiosService} from "../../../services/axiosServices";
+import {API_URL, fixUrl} from "../../../constanst";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Formik, Form } from "formik";
-import useSweetAlert from "../../hooks/useSweetAlert";
+import useSweetAlert from "../../../hooks/useSweetAlert";
 
 const RequestReportSpaces = () => {
     const nagigate = useNavigate();

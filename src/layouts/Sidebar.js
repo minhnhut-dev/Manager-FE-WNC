@@ -1,7 +1,7 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
 import AppContext from "../Context/appContext";
-import {translateByUserRole, UserRole} from "../constanst";
+import { UserRole} from "../constanst";
 import {useContext} from "react";
 
 const Sidebar = () => {
@@ -27,7 +27,7 @@ const Sidebar = () => {
         },
         {
           title: "Danh sách báo cáo bảng quảng cáo",
-          href: "/danh-sach-bao-cao-quang-cao",
+          href: "/danh-sach-bao-cao-bang-quang-cao",
           icon: "bi bi-card-text",
         })
   }else {

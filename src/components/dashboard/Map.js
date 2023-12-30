@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState} from 'react';
 import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { geoJson } from '../../utils/mock/geoJson';
 import {MAPBOX_ACCESS_TOKEN} from '../../utils/config';
 import "./map.css";
 import {formatGeoJson} from '../../services/formatGeoJSON';
 function Map({optionsId, geoJSon}) {
   mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
-
   const mapContainerRef = useRef(null);
+
+  console.log(geoJSon);
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
@@ -22,7 +22,7 @@ function Map({optionsId, geoJSon}) {
     map.on("load", () => {
       map.addSource('places', {
         'type': 'geojson',
-        'data': formatGeoJson(geoJSon)
+        'data': formatGeoJson(geoJSon.data ? geoJSon.data : geoJSon)
       });
 
       map.addLayer({

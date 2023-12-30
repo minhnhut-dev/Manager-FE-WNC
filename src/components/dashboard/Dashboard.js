@@ -28,6 +28,11 @@ const Dashboard = () => {
     return data;
   }
 
+  const loadSpacesByDepartment = async () => {
+    const {data} = await axiosService.get(`/spaces`);
+    return data;
+  }
+
   useEffect(() => {
     if(currentUser?.role === "DISTRICT_MANAGER"){
       loadSpacesByDistrict(optionsId).then((data) => {
@@ -35,6 +40,11 @@ const Dashboard = () => {
       })
     }else if(currentUser?.role === "WARD_MANAGER"){
       loadSpacesByWard().then(data => {
+        setMap(data);
+      })
+    }else
+    {
+      loadSpacesByDepartment().then(data => {
         setMap(data);
       })
     }
