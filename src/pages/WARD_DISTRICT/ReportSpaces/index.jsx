@@ -20,10 +20,8 @@ const ReportSpaces = () => {
     try {
       const response = await axiosService.get(`reports-space/update-state-report-space-delete/${reportId}`);
       const { data } = response;
-      // Bạn có thể thêm mã xử lý tại đây nếu cần
       return data;
     } catch (error) {
-      // Xử lý lỗi tại đây nếu cần
       console.error('Error deleting report space:', error);
       throw error;
     }
@@ -65,21 +63,12 @@ const ReportSpaces = () => {
       }
     })
   };
-
-  // const handleLoadReportSpaces = async () => {
-  //   const response = await axiosService.get("/reports-space");
-  //   const { data } = response;
-  //   return data;
-  // };
+  
   const loadReportSpacesByWard = async () => {
     const {data} = await axiosService.get(`/reports-space/area?ward=${current_user?.ward?.id}`);
     return data;
   }
   useEffect(() => {
-    // handleLoadReportSpaces().then((data) => {
-    //   setListReportSpaces(data);
-    // });
-
     if(current_user?.role === "DISTRICT_MANAGER"){
       // loadSpacesByDistrict(optionsId).then((data) => {
       //   setMap(data);
