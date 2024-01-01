@@ -1,6 +1,6 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
-import AppContext from "../Context/appContext";
+import AppContext from "../constanst/Context/appContext";
 import { UserRole} from "../constanst";
 import {useContext} from "react";
 
@@ -17,7 +17,7 @@ const Sidebar = () => {
         },
         {
           title: "Danh sách bảng quảng cáo",
-          href: "/danh-sach-loai-bang-quang-cao",
+          href: "/danh-sach-dia-diem-quang-cao",
           icon: "bi bi-layout-split",
         },
         {
@@ -82,16 +82,16 @@ const Sidebar = () => {
         //   href: "#",
         //   icon: "bi bi-graph-up",
         // },
-        // {
-        //   title: "Tạo tài khoản cho cán bộ Phường, Quận",
-        //   href: "#",
-        //   icon: "bi bi-person-plus",
-        // },
-        // {
-        //   title: "Phân công khu vực quản lý cho tài khoản",
-        //   href: "#",
-        //   icon: "bi bi-people",
-        // },
+        {
+          title: "Tạo tài khoản cho cán bộ Phường, Quận",
+          href: "#",
+          icon: "bi bi-person-plus",
+        },
+        {
+          title: "Phân công khu vực quản lý cho tài khoản",
+          href: "#",
+          icon: "bi bi-people",
+        },
         )
   }
 

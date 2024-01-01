@@ -9,7 +9,6 @@ function Map({optionsId, geoJSon}) {
   mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
   const mapContainerRef = useRef(null);
 
-  console.log(geoJSon);
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,

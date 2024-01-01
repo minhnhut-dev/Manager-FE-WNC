@@ -1,6 +1,6 @@
 import {useContext, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppContext from "../Context/appContext";
+import AppContext from "../constanst/Context/appContext";
 import _ from "lodash";
 
 const useAuthCheck = () => {

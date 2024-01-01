@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import Themeroutes from "./routes/Router";
 import moment from "moment";
-import AppContext from "./Context/appContext";
+import AppContext from "./constanst/Context/appContext";
 import "moment/locale/vi";
 import {React, useState} from "react";
 import { memo } from 'react';

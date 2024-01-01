@@ -23,7 +23,6 @@ const ReportState = {
 }
 
 function  getReportState(state) {
-     console.log(state);
   switch(state) {
     case ReportState.PROCESSING:
       return 'Đang xử lý';

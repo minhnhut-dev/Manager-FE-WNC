@@ -1,12 +1,14 @@
 import React, {useContext, useState} from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import useLocalStorageUser from "../../hooks/useLocalStorageUser";
 import {axiosService} from "../../services/axiosServices";
-import AppContext from "../../Context/appContext";
+import AppContext from "../../constanst/Context/appContext";
 import {useNavigate} from "react-router-dom";
 import {Button} from "reactstrap";
 import ModalSendOTP from "./ModalSendOTP";
+import Swal from "sweetalert2";
+
 const LoginPage = () => {
     const navigate = useNavigate()
     const {setCurrentUser}  = useContext(AppContext)
@@ -17,15 +19,14 @@ const LoginPage = () => {
     // Yup validation schema
     const validationSchema = Yup.object().shape({
         userName: Yup.string()
-            .required('Username is required'),
+            .required('Tên đăng nhập là bắt buộc'),
         password: Yup.string()
-            .min(5, 'Password must be at least 6 characters')
-            .required('Password is required'),
+            .min(5, 'Mật khẩu phải có ít nhất 5 ký tự')
+            .required('Mật khẩu là bắt buộc'),
     });
 
     const handleLogin = async (values) => {
-        const response = await axiosService.post("/auth/signin", {username: values?.userName, password: values?.password})
-        return response;
+        return axiosService.post("/auth/signin", {username: values?.userName, password: values?.password});
     }
 
     const handleSubmit = async (values, { setSubmitting }) => {
@@ -39,10 +40,13 @@ const LoginPage = () => {
             setTimeout(() => {
                 setSubmitting(false); // Reset the submitting state
                 navigate('/');
-                // Optionally, navigate to another page or show a success message
             }, 1500);
         }catch (e) {
-            console.log(e)
+            await Swal.fire({
+                icon: 'error',
+                title: 'Ôi có lỗi xảy ra',
+                text: 'Tài khoản hoặc mật khẩu không đúng',
+            })
         }
     };
 

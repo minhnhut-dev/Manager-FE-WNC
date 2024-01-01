@@ -4,7 +4,9 @@ import {
     API_URL,
     fixUrl,
     getRequestStateColor,
-    getRequestStateName, hiddenActionDeleteByReportState, hiidenActionAcceptByRequestState
+    getRequestStateName,
+    hiddenActionDeleteByReportState,
+    hiidenActionAcceptByRequestState
 } from "../../../constanst";
 import {axiosService} from "../../../services/axiosServices";
 import Swal from "sweetalert2";
@@ -19,8 +21,7 @@ const ListReportSpacesByUser = () => {
 
     const acceptRequestSpaces = async (reportId) => {
         try {
-            const response = await axiosService.post(`/request-space/send-email/${reportId}`);
-            return response;
+            return await axiosService.post(`/request-space/send-email/${reportId}`);
         } catch (error) {
             console.error('Error deleting report space:', error);
             throw error;
@@ -29,8 +30,7 @@ const ListReportSpacesByUser = () => {
 
     const declineRequestSpaces = async (reportId) => {
         try {
-            const response = await axiosService.post(`/request-space/decline/${reportId}`);
-            return response;
+            return await axiosService.post(`/request-space/decline/${reportId}`);
         } catch (error) {
             console.error('Error deleting report space:', error);
             throw error;

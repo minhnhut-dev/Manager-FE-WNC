@@ -1,6 +1,6 @@
 import { Card, CardBody, Table, CardTitle } from "reactstrap";
 import {useContext, useEffect, useState} from "react";
-import { axiosService } from "../../../services/axiosServices";
+import { axiosService } from "../../../../services/axiosServices";
 import {
     API_URL,
     fixUrl,
@@ -8,10 +8,10 @@ import {
     getReportStateColor,
     hiddenActionDeleteByReportState,
     hiddenActionEditByReportState
-} from "../../../constanst";
-import AppContext from "../../../Context/appContext";
+} from "../../../../constanst";
+import AppContext from "../../../../constanst/Context/appContext";
 import {Link} from "react-router-dom";
-import useSweetAlert from "../../../hooks/useSweetAlert";
+import useSweetAlert from "../../../../hooks/useSweetAlert";
 import Swal from "sweetalert2";
 const ReportSpaces = () => {
   const {currentUser: current_user} = useContext(AppContext);
@@ -68,11 +68,17 @@ const ReportSpaces = () => {
     const {data} = await axiosService.get(`/reports-space/area?ward=${current_user?.ward?.id}`);
     return data;
   }
+  const loadReportSpacesDistrict = async () => {
+    const {data} = await axiosService.get(`/reports-space/area?district=${current_user?.district?.id}`);
+    return data;
+  }
+
   useEffect(() => {
     if(current_user?.role === "DISTRICT_MANAGER"){
-      // loadSpacesByDistrict(optionsId).then((data) => {
-      //   setMap(data);
-      // })
+      loadReportSpacesDistrict().then((data) => {
+        // setMap(data);
+        setListReportSpaces(data);
+      })
     }else if(current_user?.role === "WARD_MANAGER"){
       loadReportSpacesByWard().then(data => {
         setListReportSpaces(data);

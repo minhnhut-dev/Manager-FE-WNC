@@ -1,10 +1,10 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Surface from "../pages/Surface/index.jsx";
-import Report from "../pages/WARD_DISTRICT/ReportSpaces/index.jsx";
+import Report from "../pages/WARD_DISTRICT/Space/ReportSpaces/index.jsx";
 import LoginPage from "../pages/Login/index";
-import ReportSpaces from "../pages/WARD_DISTRICT/ReportSpaces/index.jsx";
-import RequestReportSpaces from "../pages/WARD_DISTRICT/RequestReportSpaces";
+import ReportSpaces from "../pages/WARD_DISTRICT/Space/ReportSpaces/index.jsx";
+import RequestReportSpaces from "../pages/WARD_DISTRICT/Space/RequestReportSpaces";
 import ListReportSpacesByUser from "../pages/Department/ListReportSpacesFromUser";
 import ManageWardDistrict from "../pages/Department/ManageWardDistrict";
 import ManageAllTypesOfForms from "../pages/Department/ManageAllTypesOfForms";
@@ -13,14 +13,16 @@ import EditSpace from "../pages/Department/ManageSpace/EditSpace";
 import EditProfile from "../pages/EditProfile";
 import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../services/protectedRouter";
-import ListReportSurface from "../pages/WARD_DISTRICT/ReportSurface/ListReportSurface";
-import AddRequestEditSurfaces from "../pages/WARD_DISTRICT/ReportSurface/AddRequestEditSurfaces";
+import ListReportSurface from "../pages/WARD_DISTRICT/Surfaces/ReportSurface/ListReportSurface";
+import AddRequestEditSurfaces from "../pages/WARD_DISTRICT/Surfaces/ReportSurface/AddRequestEditSurfaces";
+import ListRequestAddSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpaces/ListRequestAddSpaces";
+import RequestAddSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpaces/RequestAddSpaces";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
-const AddRequestFormReportById = lazy(() => import("../pages/WARD_DISTRICT/RequestReportSpaces/index"));
+const AddRequestFormReportById = lazy(() => import("../pages/WARD_DISTRICT/Space/RequestReportSpaces/index"));
 const Starter = lazy(() => import("../views/Starter.js"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
@@ -90,6 +92,16 @@ const ThemeRoutes = [
         exact: true,
         element: < EditSpace/>,
       },
+      {
+        path: "/danh-sach-dia-diem-quang-cao",
+        exact: true,
+        element: < ListRequestAddSpaces />,
+      },
+      {
+        path: "/yeu-cau-them-diadiem-quang-cao",
+        exact: true,
+        element: < RequestAddSpaces />,
+      }
 
       ]
     },

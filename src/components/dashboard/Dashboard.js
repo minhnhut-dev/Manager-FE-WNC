@@ -4,7 +4,7 @@ import Select from "../Select";
 import {useContext, useEffect, useState} from "react";
 import {axiosService} from "../../services/axiosServices";
 import {user_info} from "../../utils/mock/user";
-import AppContext from "../../Context/appContext";
+import AppContext from "../../constanst/Context/appContext";
 import {UserRole} from "../../constanst";
 
 const Dashboard = () => {

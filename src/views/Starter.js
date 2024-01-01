@@ -1,7 +1,7 @@
 import { Col, Row } from "reactstrap";
 import ReportSpaces from "../components/dashboard/ReportSpaces";
 import Dashboard from "../components/dashboard/Dashboard";
-import AppContext from "../Context/appContext";
+import AppContext from "../constanst/Context/appContext";
 import {useContext} from "react";
 import ReportSurfaces from "../components/dashboard/ReportSurfaces";
 const Starter = () => {

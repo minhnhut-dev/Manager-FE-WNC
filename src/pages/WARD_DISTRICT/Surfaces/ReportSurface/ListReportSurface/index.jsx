@@ -1,6 +1,6 @@
 import { Card, CardBody, Table, CardTitle } from "reactstrap";
 import {useContext, useEffect, useState} from "react";
-import {axiosService} from "../../../../services/axiosServices";
+import {axiosService} from "../../../../../services/axiosServices";
 import {
     API_URL,
     fixUrl,
@@ -8,16 +8,16 @@ import {
     getReportStateColor,
     hiddenActionDeleteByReportState,
     hiddenActionEditByReportState
-} from "../../../../constanst"
-import AppContext from "../../../../Context/appContext";
+} from "../../../../../constanst"
+import AppContext from "../../../../../constanst/Context/appContext";
 import {Link} from "react-router-dom";
-import useSweetAlert from "../../../../hooks/useSweetAlert";
+import useSweetAlert from "../../../../../hooks/useSweetAlert";
 import Swal from "sweetalert2";
 const ReportSpaces = () => {
-    const {currentUser: current_user} = useContext(AppContext);
+    let {currentUser: current_user} = useContext(AppContext);
 
-    const [listReportSpaces,setListReportSpaces] = useState([]);
-    const handleDeleteReportSpaces = async (reportId) => {
+    let [listReportSpaces,setListReportSpaces] = useState([]);
+    const handleDeleteReportSpaces = async (reportId)=> {
         try {
             const response = await axiosService.get(`reports-space/update-state-report-space-delete/${reportId}`);
             const { data } = response;

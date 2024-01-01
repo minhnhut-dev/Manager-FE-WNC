@@ -1,39 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import { Col, Row, Container, Card, CardImg, CardBody, CardTitle, CardText, FormGroup, Label, Input, Button } from 'reactstrap';
 import {useNavigate, useParams} from "react-router-dom";
-import {axiosService} from "../../../services/axiosServices";
-import {API_URL, fixUrl} from "../../../constanst";
+import {axiosService} from "../../../../../services/axiosServices";
+import {API_URL, fixUrl} from "../../../../../constanst";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Formik, Form } from "formik";
-import useSweetAlert from "../../../hooks/useSweetAlert";
+import useSweetAlert from "../../../../../hooks/useSweetAlert";
 
 const RequestReportSpaces = () => {
     const nagigate = useNavigate();
 
-    const showAlert = useSweetAlert(() => nagigate('/danh-sach-bao-cao-dia-diem'));
+    const showAlert = useSweetAlert(() => nagigate('/danh-sach-bao-cao-bang-quang-cao'));
     const handleOK = () => {
         showAlert({
-            title: "Good job!",
-            text: "You clicked the button!",
+            title: "Thành công!",
+            text: "Thêm yêu cầu thành công!",
             icon: "success"
         });
     };
 
-    const {spacesId} = useParams();
+    const {surfaceId} = useParams();
     const EditRequestSchema = Yup.object().shape({
         reason: Yup.string()
             .required('Mô tả lý do là bắt buộc'),
         zone: Yup.string()
             .required('Chọn một loại quy hoạch'),
+        width: Yup.number().required('Chiều rộng là bắt buộc'),
+        height: Yup.number().required('Chiều dài là bắt buộc'),
     });
     const handleLoadSpace = async () => {
-        const response = await axiosService.get(`/reports-space/${spacesId}`);
+        const response = await axiosService.get(`/reports-surface/${surfaceId}`);
         const { data } = response;
         return data;
     }
 
-    const handleRequestEditSpace = async (values) => {
-        const response = await axiosService.post("/request-space", values, {
+    const handleRequestEditSurfaces = async (values) => {
+        const response = await axiosService.post("/request-surface", values, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 "Accept": "multipart/form-data",
@@ -44,23 +46,19 @@ const RequestReportSpaces = () => {
     }
 
     const handleSubmit = (values, { setSubmitting }) => {
-
         const formData = new FormData();
         formData.append("reason", values?.reason);
         formData.append("zone", values?.zone);
         formData.append("imgUrl", values?.imgUrl);
-        formData.append("address", space?.space?.address);
-        formData.append("latitude", space?.space?.latitude);
-        formData.append("longitude", space?.space?.longitude);
-        formData.append("formAdvertising", space?.space?.formAdvertising?.id);
-        formData.append("locationTypes", space?.space?.locationTypes?.id);
-        formData.append("ward", space?.space?.ward?.id);
-        formData.append("district", space?.space?.district?.id);
-        formData.append("formReport", space?.formReport?.id);
-        formData.append("space", space?.space?.id);
-        formData.append("reportSpace", spacesId)
-        // Xử lý dữ liệu form tại đây
-        handleRequestEditSpace(formData).then((data) => {
+        formData.append("address", space?.surface?.space?.address);
+        formData.append("latitude", space?.surface?.space?.latitude);
+        formData.append("longitude", space?.surface?.space.longitude);
+        formData.append("height", values?.height);
+        formData.append("width", values?.width);
+        formData.append("reportSurface", space?.id);
+        formData.append("surfaceType", space?.surface?.surfaceType?.id);
+
+        handleRequestEditSurfaces(formData).then((data) => {
             handleOK()
         })
         setSubmitting(false);
@@ -89,25 +87,26 @@ const RequestReportSpaces = () => {
                     </Card>
 
                     <Card>
-                        <CardImg top className={'w-50 p-2'} src={API_URL + fixUrl(space?.space?.imgUrl)} alt="Card image cap" />
+                        <CardImg top className={'w-50 p-2'} src={API_URL + fixUrl(space?.surface?.imgUrl)} alt="Card image cap" />
                         <CardBody>
-                            <CardText>Loại địa điểm: {space?.space.locationTypes?.name}</CardText>
-                            <CardText>Hình thức: {space?.space?.formAdvertising?.name}</CardText>
-                            <CardText>Địa chỉ: {space?.space?.address}</CardText>
+                            <CardText>Loại địa điểm: {space?.surface.surfaceType?.name}</CardText>
+                            <CardText>Hình thức: {space?.formReport?.name}</CardText>
+                            <CardText>Địa chỉ: {space?.surface?.space.address}</CardText>
+                            <CardText>Lý do: {space?.content} </CardText>
                         </CardBody>
                     </Card>
                 </Col>
 
                 <Col md={8}>
                     <Formik
-                        initialValues={{ reason: '', zone: '', imgUrl: null }}
+                        initialValues={{ reason: '', zone: '', imgUrl: null, width: '', height: '' }}
                         validationSchema={EditRequestSchema}
                         onSubmit={handleSubmit}
                     >
                         {({ isSubmitting, setFieldValue }) => (
                             <Form >
                                 <FormGroup>
-                                    <Label for="reason">Mô Tả Lý Do</Label>
+                                    <Label for="reason" className={"fw-bolder"}>Mô Tả Lý Do chỉnh sửa</Label>
                                     <Field as={Input} type="textarea" name="reason" id="reason" placeholder="Nhập mô tả lý do"/>
                                     <ErrorMessage name="reason" component="div" className="text-danger" />
                                 </FormGroup>
@@ -121,6 +120,20 @@ const RequestReportSpaces = () => {
                                     </Field>
                                     <ErrorMessage name="zone" component="div" className="text-danger" />
                                 </FormGroup>
+                                <Col md={12} className={"p-0"}>
+                                        <FormGroup>
+                                            <Label for="height">Chiều dài</Label>
+                                            <Field as={Input} type="text" name="height" id="height"  />
+                                            <ErrorMessage name="height" component="div" className="text-danger" />
+                                        </FormGroup>
+                                    <FormGroup>
+                                        <Label for="width">Chiều rộng</Label>
+                                        <Field as={Input} type="text" name="width" id="width"  />
+                                        <ErrorMessage name="width" component="div" className="text-danger" />
+
+                                    </FormGroup>
+
+                                </Col>
 
                                 <FormGroup>
                                     <Label for="imgUrl">Hình Ảnh</Label>
