@@ -1,17 +1,86 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Card, Container, FormGroup, Label, Input, Button, CardSubtitle, Col} from "reactstrap";
 import * as Yup from 'yup';
 import {ErrorMessage, Field, Formik, Form} from 'formik';
 import Map from "../../Component/Map";
+import {useNavigate} from "react-router-dom";
+import {axiosService} from "../../../../../services/axiosServices";
+import Swal from "sweetalert2";
 
 const RequestAddSpaces = () => {
+  const formikRef = useRef();
+  const formInput =useRef();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
     reason: Yup.string().required('Lý do là bắt buộc'),
     latitude: Yup.number().required('Vĩ độ là bắt buộc'),
     longitude: Yup.number().required('Kinh độ là bắt buộc'),
     address: Yup.string().required('Địa chỉ là bắt buộc'),
-
+    zone: Yup.string().required('Quy hoạch là bắt buộc'),
+    imgUrl: Yup.mixed().required('Hình ảnh là bắt buộc'),
   });
+
+  const handleSetValuesLatLngFromMap = (values) => {
+    formikRef.current.setFieldValue('latitude', values.lat);
+    formikRef.current.setFieldValue('longitude', values.lng);
+    formikRef.current.setFieldValue('address', values.address);
+    formikRef.current.setFieldValue('ward', values.ward);
+    formikRef.current.setFieldValue('district', values.district);
+  }
+  const handleRequestAddSpaces = (params) => {
+    const response = axiosService.post("/temp-space/condition-create", params, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response;
+  }
+  const handleSubmit = async (values, {setSubmitting}) => {
+    const params = {
+      reason: values.reason,
+      zone: values.zone,
+      latitude: values.latitude,
+      longitude: values.longitude,
+      address: values.address,
+      imgUrl: values.imgUrl,
+      formAdvertising: 1,
+      locationTypes: 1,
+      ward: values?.ward,
+      district: values?.district
+    }
+    const formData = new FormData();
+    formData.append('reason', params.reason);
+    formData.append('zone', params.zone);
+    formData.append('latitude', params.latitude);
+    formData.append('longitude', params.longitude);
+    formData.append('address', params.address);
+    formData.append('imgUrl', params.imgUrl);
+    formData.append('formAdvertising', params.formAdvertising);
+    formData.append('locationTypes', params.locationTypes);
+    formData.append('ward', params.ward);
+    formData.append('district', params.district);
+
+    handleRequestAddSpaces(formData).then((response) => {
+      const {status} = response;
+      if (status === 200 || status === 201) {
+         Swal.fire({
+          icon: 'success',
+          title: 'Yêu cầu thêm địa điểm mới thành công',
+          showConfirmButton: true,
+        }).then((result) => {
+          if(result.isConfirmed) {
+            navigate('/danh-sach-dia-diem-quang-cao');
+          }
+         })
+      }
+    })
+  }
+
+  const handleMovetoFormInput = () => {
+    formInput.current.scrollIntoView({behavior: 'smooth'});
+  }
+
   return (
     <>
       <Container>
@@ -19,14 +88,15 @@ const RequestAddSpaces = () => {
         <Card className={"p-3"}>
           <CardSubtitle className={"fw-bolder"}>Hãy chọn 1 điểm cần đặt trên bảng đồ</CardSubtitle>
           <br/>
-          <Map/>
+          <Map onBindingLatLong = {handleSetValuesLatLngFromMap} handleMovetoFormInput={handleMovetoFormInput}/>
         </Card>
-      <Card className={"p-3"}>
+      <Card className={"p-3"} innerRef={formInput}>
         <Col md={12}>
           <Formik
-              initialValues={{ reason: '', zone: '', imgUrl: null }}
+              initialValues={{ reason: '', zone: '', imgUrl: null, latitude: '', longitude: '', address: ''}}
               validationSchema={validationSchema}
-              // onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
+              innerRef={formikRef}
           >
             {({ isSubmitting, setFieldValue }) => (
                 <Form >
@@ -50,17 +120,22 @@ const RequestAddSpaces = () => {
                     <Label for="imgUrl">Hình Ảnh</Label>
                     <input type="file" name="imgUrl" id="imgUrl" onChange={(event) => {
                       setFieldValue("imgUrl", event.currentTarget.files[0]);
-                    }}/>
+                    }} required={true}/>
                   </FormGroup>
                   <FormGroup>
                     <Label for="lat">Vĩ độ</Label>
-                    <Field as={Input} type="text" name="lat" id="lat" placeholder="Nhập vĩ độ"/>
-                    <ErrorMessage name="lat" component="div" className="text-danger" />
+                    <Field as={Input} type="text" name="latitude" id="latitude" placeholder="Nhập vĩ độ" readOnly/>
+                    <ErrorMessage name="latitude" component="div" className="text-danger" />
                   </FormGroup>
                   <FormGroup>
                     <Label for="lng">Kinh độ</Label>
-                    <Field as={Input} type="text" name="lng" id="lng" placeholder="Nhập kinh độ"/>
-                    <ErrorMessage name="lng" component="div" className="text-danger" />
+                    <Field as={Input} type="text" name="longitude" id="longitude" placeholder="Nhập kinh độ" readOnly/>
+                    <ErrorMessage name="longitude" component="div" className="text-danger" />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="address">Địa chỉ</Label>
+                    <Field as={Input} type="text" name="address" id="address" placeholder="Nhập địa chỉ" readOnly/>
+                    <ErrorMessage name="address" component="div" className="text-danger" />
                   </FormGroup>
                   <Button type="submit" color="primary" disabled={isSubmitting}>Thêm Yêu Cầu Chỉnh Sửa</Button>
                 </Form>

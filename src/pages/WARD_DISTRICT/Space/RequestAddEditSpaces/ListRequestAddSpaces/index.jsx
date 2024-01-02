@@ -10,12 +10,52 @@ import {
 import {Link} from "react-router-dom";
 import AppContext from "../../../../../constanst/Context/appContext";
 import {axiosService} from "../../../../../services/axiosServices";
+import {
+  getReportAddSpaces,
+  getReportAddSpacesColor,
+  hiddenActionDeleteByReportAddSpaces
+} from "../../../../../constanst/WARD_DISTRICT";
+import Swal from "sweetalert2";
 const RequestAddSpaces = () => {
   const [listRequestAddSpaces, setListRequestAddSpaces] = useState([]);
 
   const handleLoadListRequestAddSpaces = async () => {
     const response = await  axiosService.get(`/temp-space`);
     return response;
+  }
+
+  const deleteRequestAddSpaces = async (id) => {
+    const response = await axiosService.delete(`/temp-space/${id}`);
+   return response;
+
+  }
+
+  const handleDeleteRequestAddSpaces = (id) => {
+
+      Swal.fire({
+        icon: 'question',
+        title: 'Bạn có muốn xoá yêu cầu này không?',
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Có',
+        cancelButtonText: 'Không',
+      }).then((result) => {
+        if(result.isConfirmed) {
+          deleteRequestAddSpaces(id).then((response) => {
+            const {status} = response;
+            if (status === 200 || status === 201) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Xoá yêu cầu thành công',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+              });
+                let newListRequestAddSpaces = listRequestAddSpaces.filter((item) => item.id !== id);
+                setListRequestAddSpaces(newListRequestAddSpaces);
+            }
+          })
+        }
+      });
   }
 
   useEffect(() => {
@@ -34,7 +74,7 @@ const RequestAddSpaces = () => {
            <Card>
              <CardBody>
                <CardTitle tag="h4" className="fw-bold">
-                 Danh sách báo cáo địa điểm
+                 Danh sách yêu cầu tạo địa điểm
                </CardTitle>
                <Link to="/yeu-cau-them-diadiem-quang-cao">
                  <Button color={"success"}>
@@ -76,25 +116,17 @@ const RequestAddSpaces = () => {
                        </td>
                        <td>
                          <span
-                             className={`p-2 text-white bg-${getReportStateColor(tdata?.state)} d-inline-block ms-3`}>{getReportState(tdata?.state)}</span>
+                             className={`p-2 text-white bg-${getReportAddSpacesColor(tdata?.state)} d-inline-block ms-3`}>{getReportAddSpaces(tdata?.state)}</span>
                        </td>
                        <td className={"d-flex gap-1"}>
-                         {hiddenActionEditByReportState(tdata?.state) ? <div></div>
-                             : <Link to={`/them-yeu-cau-chinh-sua-dia-diem/${tdata.id}`}>
-                               <button className="btn btn-primary btn-sm">
-                                 <i className="bi bi-pencil-fill"></i>
-                               </button>
-                             </Link>
-                         }
-                         {hiddenActionDeleteByReportState(tdata?.state) ?
-                             <button className="btn btn-danger btn-sm ms-2">
+                         {hiddenActionDeleteByReportAddSpaces(tdata?.state) ? <div></div>
+                            : <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeleteRequestAddSpaces(tdata?.id)}>
                                <i className="bi bi-trash-fill"></i>
-                             </button> : <div></div>
+                             </button>
                          }
-
                          <Link to={`/them-yeu-cau-chinh-sua-dia-diem/${tdata.id}`}>
                            <button className="btn btn-primary btn-sm">
-                             <i className="bi bi-eye"></i>
+                                Xem các bảng quảng cáo
                            </button>
                          </Link>
                        </td>

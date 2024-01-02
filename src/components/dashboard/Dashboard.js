@@ -29,7 +29,7 @@ const Dashboard = () => {
   }
 
   const loadSpacesByDepartment = async () => {
-    const {data} = await axiosService.get(`/spaces`);
+    const {data} = await axiosService.get(`/spaces?limit=1000`);
     return data;
   }
 

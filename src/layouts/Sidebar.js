@@ -16,7 +16,7 @@ const Sidebar = () => {
           icon: "bi bi-speedometer2",
         },
         {
-          title: "Danh sách bảng quảng cáo",
+          title: "Danh sách yêu cầu tạo địa điểm quảng cáo",
           href: "/danh-sach-dia-diem-quang-cao",
           icon: "bi bi-layout-split",
         },
@@ -29,7 +29,13 @@ const Sidebar = () => {
           title: "Danh sách báo cáo bảng quảng cáo",
           href: "/danh-sach-bao-cao-bang-quang-cao",
           icon: "bi bi-card-text",
-        })
+        },
+        {
+          title: "Danh sách điểm đặt quảng cáo",
+          href: "#",
+          icon: "bi bi-card-text",
+        }
+        )
   }else {
     navigation.push(
         {
