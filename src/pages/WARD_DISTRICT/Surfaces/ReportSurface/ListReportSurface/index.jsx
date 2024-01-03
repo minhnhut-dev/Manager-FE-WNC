@@ -47,7 +47,7 @@ const ReportSpaces = () => {
                             icon: "success",
                             title: "Xoá thành công",
                         });
-                        let newListReportSpaces = listReportSpaces.filter(item => item.id != reportId);
+                        let newListReportSpaces = listReportSpaces.filter(item => item.id !== reportId);
                         setListReportSpaces((newListReportSpaces));
                     }else{
                         showAlert({

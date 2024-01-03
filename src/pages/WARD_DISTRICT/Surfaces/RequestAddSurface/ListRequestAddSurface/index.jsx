@@ -27,7 +27,7 @@ const ListRequestAddSurfaces = () => {
   }
 
   const deleteRequestAddSpaces = async (id) => {
-    const response = await axiosService.delete(`/temp-space/${id}`);
+    const response = await axiosService.delete(`/temp-surface/${id}`);
     return response;
   }
 
@@ -119,6 +119,11 @@ const ListRequestAddSurfaces = () => {
                              className={`p-2 text-white bg-${getReportAddSpacesColor(tdata?.state)} d-inline-block ms-3`}>{getReportAddSpaces(tdata?.state)}</span>
                         </td>
                         <td className={"d-flex gap-1"}>
+                          <Link to={`/yeu-cau-chinh-sua-bang-quang-cao/${tdata?.id}`}>
+                            <button className="btn btn-primary btn-sm">
+                              <i className="bi bi-pencil-fill"></i>
+                            </button>
+                          </Link>
                           {hiddenActionDeleteByReportAddSpaces(tdata?.state) ? <div></div>
                               : <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeleteRequestAddSpaces(tdata?.id)}>
                                 <i className="bi bi-trash-fill"></i>

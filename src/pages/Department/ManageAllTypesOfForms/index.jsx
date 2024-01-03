@@ -41,8 +41,8 @@ const ManageAllTypesOfForms = () => {
                     <td>{item.name}</td>
                     <td>
                         {/* Button chức năng cho dòng 1 */}
-                        <Button color="primary">Edit</Button>{' '}
-                        <Button color="danger">Delete</Button>
+                        <Button color="primary">Chỉnh sửa</Button>{' '}
+                        <Button color="danger">Xoá</Button>
                     </td>
                 </tr>
             ))
@@ -57,14 +57,13 @@ const ManageAllTypesOfForms = () => {
                     <td>{item.name}</td>
                     <td>
                         {/* Button chức năng cho dòng 1 */}
-                        <Button color="primary">Edit</Button>{' '}
-                        <Button color="danger">Delete</Button>
+                        <Button color="primary">Chỉnh sửa</Button>{' '}
+                        <Button color="danger">Xoá</Button>
                     </td>
                 </tr>
             ))
         );
     }
-
 
     return (
         <div>
@@ -74,7 +73,9 @@ const ManageAllTypesOfForms = () => {
                         <Card>
                             <CardBody>
                                 <CardTitle className="d-flex justify-content-center" tag="h3">Danh sách hình thức quảng cáo
-                                    <Button color="success" >Click Me</Button>
+                                </CardTitle>
+                                <CardTitle>
+                                    <Button color="success" className={"btn btn-sm"} >Thêm hình thức quảng cáo</Button>
                                 </CardTitle>
                                 <Table>
                                     <thead>
@@ -98,21 +99,18 @@ const ManageAllTypesOfForms = () => {
                             <CardBody>
                                 <CardTitle className="d-flex justify-content-center mt-2" tag="h3">
                                     Danh sách loại hình báo cáo
-                                    <Button color="success">
-                                        Click Me
+                                </CardTitle>
+                                <CardTitle>
+                                    <Button color="success" className={"btn btn-sm"}>
+                                        Thêm loại hình báo cáo
                                     </Button>
                                 </CardTitle>
-
-
-
-
                                 <Table>
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Tên loại hình báo cáo</th>
-
-                                            <th>Chức năng</th> {/* Column mới chứa các button chức năng */}
+                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>

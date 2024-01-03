@@ -24,10 +24,6 @@ console.log(spacesId)
     });
   }, []);
 
-  console.log(space)
-
-
-
   return (
     <Container>
       <Row>
@@ -38,7 +34,6 @@ console.log(spacesId)
             </CardTitle>
             <CardBody>
               <Form>
-                
               </Form>
             </CardBody>
           </Card>

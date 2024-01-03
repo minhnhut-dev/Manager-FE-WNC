@@ -31,7 +31,7 @@ const ManageSpace = () => {
         return (
             space.map((item, index) => (
                 <tr key={index}>
-                    <th scope="row">{item.id}</th>
+                    {/*<th scope="row">{item.id}</th>*/}
                     <td className="text-center">{item.address}</td>
                     <td className="text-center">{item.ward.name}</td>
                     <td className="text-center">{item.district.name}</td>
@@ -43,9 +43,12 @@ const ManageSpace = () => {
                     <td className="text-center">{item.zone}</td>
                     <td className="text-center" style={{ whiteSpace: 'nowrap' }}>
                         <Link to={`/chinh-sua-diem-dat-quang-cao/${item.id}`}>
-                            <Button color="primary">Edit</Button>{' '}
-                        </Link>
-                        <Button color="danger">Delete</Button>
+                            <Button color="primary">Chỉnh sửa</Button> {" "}
+                        </Link>{" "}
+                      <Link to={`/chinh-sua-diem-dat-quang-cao/${item.id}`}>
+                        <Button color="primary">DS quảng cáo</Button> {" "}
+                      </Link>
+                        <Button color="danger">Xoá</Button>
                     </td>
                 </tr>
             ))
@@ -93,19 +96,14 @@ const ManageSpace = () => {
                     <Card>
                         <CardBody>
                             <CardTitle className="d-flex justify-content-center" tag="h3">Quản lý điểm đặt quảng cáo
-                                <Button color="success" >Click Me</Button>
                             </CardTitle>
-                            {/* <div className="d-flex">
-  <Input id="input1" name="input1" type="select" placeholder="Input 1" className="mr-2" style={{ marginRight: '10px' }} />
-  <Input id="input2" name="input2" type="select" placeholder="Input 2" />
-</div> */}
-
-
-
+                          <CardTitle>
+                            <Button color="success" >Thêm điểm đặt quảng cáo</Button>
+                          </CardTitle>
                             <Table>
                                 <thead>
                                     <tr>
-                                        <th className="text-center">#</th>
+                                        {/*<th className="text-center">#</th>*/}
                                         <th className="text-center">Địa chỉ</th>
                                         <th className="text-center">Phường</th>
                                         <th className="text-center">Quận</th>

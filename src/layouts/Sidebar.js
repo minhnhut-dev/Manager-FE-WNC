@@ -53,11 +53,11 @@ const Sidebar = () => {
           href: "/quang-ly-diem-dat-quang-cao",
           icon: "bi bi-map",
         },
-        // {
-        //   title: "Quản lý các bảng quảng cáo",
-        //   href: "#",
-        //   icon: "bi bi-signpost-2",
-        // },
+        {
+          title: "Quản lý các bảng quảng cáo",
+          href: "#",
+          icon: "bi bi-signpost-2",
+        },
         // {
         //   title: "Xét duyệt yêu cầu chỉnh sửa điểm quảng cáo",
         //   href: "#",
@@ -73,30 +73,20 @@ const Sidebar = () => {
             href: "/danh-sach-yeu-cau-chinh-sua",
             icon: "bi bi-pencil-square",
         },
-        // {
-        //     title: "Xét duyệt báo cáo bảng quảng cao từ người dân",
-        //     href: "#",
-        //     icon: "bi bi-map",
-        // },
-        // {
-        //   title: "Xem và xét duyệt yêu cầu cấp phép quảng cáo",
-        //   href: "#",
-        //   icon: "bi bi-check2-circle",
-        // },
-        // {
-        //   title: "Xem thống kê và xử lý báo cáo của Phường, Quận",
-        //   href: "#",
-        //   icon: "bi bi-graph-up",
-        // },
         {
-          title: "Tạo tài khoản cho cán bộ Phường, Quận",
-          href: "#",
-          icon: "bi bi-person-plus",
+            title: "Xét duyệt báo cáo bảng quảng cáo từ người dân",
+            href: "#",
+            icon: "bi bi-map",
         },
         {
-          title: "Phân công khu vực quản lý cho tài khoản",
+          title: "Xem và xét duyệt yêu cầu cấp phép quảng cáo",
           href: "#",
-          icon: "bi bi-people",
+          icon: "bi bi-check2-circle",
+        },
+        {
+          title: "Tạo tài khoản cho cán bộ Phường, Quận và phân công",
+          href: "#",
+          icon: "bi bi-person-plus",
         },
         )
   }

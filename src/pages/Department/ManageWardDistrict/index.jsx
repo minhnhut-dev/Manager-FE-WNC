@@ -75,11 +75,6 @@ const ManageWardDistrict = () => {
         <tr key={index}>
           <th scope="row">{item.id}</th>
           <td>{item.name}</td>
-          <td>
-            {/* Button chức năng cho dòng 1 */}
-            <Button color="primary">Edit</Button>{' '}
-            <Button color="danger">Delete</Button>
-          </td>
         </tr>
       ))
     );
@@ -91,11 +86,6 @@ const ManageWardDistrict = () => {
           <th scope="row">{item.id}</th>
           <td>{item.name}</td>
           <td>{item.district.name}</td>
-          <td>
-            {/* Button chức năng cho dòng 1 */}
-            <Button color="primary">Edit</Button>{' '}
-            <Button color="danger">Delete</Button>
-          </td>
         </tr>
       ))
     );
@@ -137,8 +127,6 @@ const ManageWardDistrict = () => {
     return pagination;
   }
 
-  
-
   return (
     <div>
       <Container>
@@ -147,14 +135,12 @@ const ManageWardDistrict = () => {
             <Card>
               <CardBody>
                 <CardTitle className="d-flex justify-content-center" tag="h3">Danh sách Quận
-                  <Button color="success" >Click Me</Button>
                 </CardTitle>
                 <Table>
                   <thead>
                     <tr>
                       <th>#</th>
                       <th>Tên Quận</th>
-                      <th>Chức năng</th> {/* Column mới chứa các button chức năng */}
                     </tr>
                   </thead>
                   <tbody>
@@ -173,19 +159,13 @@ const ManageWardDistrict = () => {
               <CardBody>
                 <CardTitle className="d-flex justify-content-center mt-2" tag="h3">
                   Danh sách Phường
-                  <Button color="success">
-                    Click Me
-                  </Button>
                 </CardTitle>
-
-
                 <Input
                   id="select-ward"
                   name="select"
                   type="select"
                   onChange={ (e) => setOnOptionsChange(e.target.value)}
                 >
-                  
                   {renderingOptionsDistrict()}
                 </Input>
 
@@ -195,7 +175,6 @@ const ManageWardDistrict = () => {
                       <th>#</th>
                       <th>Tên Phường</th>
                       <th>Tên Quận</th>
-                      <th>Chức năng</th> {/* Column mới chứa các button chức năng */}
                     </tr>
                   </thead>
                   <tbody>

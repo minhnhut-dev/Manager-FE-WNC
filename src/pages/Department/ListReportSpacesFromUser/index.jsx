@@ -10,7 +10,6 @@ import {
 } from "../../../constanst";
 import {axiosService} from "../../../services/axiosServices";
 import Swal from "sweetalert2";
-// import { Card, CardBody, Table, CardTitle } from "reactstrap";
 
 const ListReportSpacesByUser = () => {
     const [listReportSpaces, setListReportSpaces] = React.useState([]);
@@ -94,10 +93,11 @@ const ListReportSpacesByUser = () => {
                         let newListReportSpaces = listReportSpaces.map(item => {
                             if(item.id === reportId){
                                 item.state = 'Accepted';
+                                console.log("item: ", item)
                             }
                             return item;
                         });
-                        setListReportSpaces((newListReportSpaces));
+                        setListReportSpaces(newListReportSpaces);
                     }else{
                         Swal.fire({
                             icon: "error",

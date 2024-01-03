@@ -21,6 +21,8 @@ import RequestEditSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpaces
 import ListRequestAddSurfaces from "../pages/WARD_DISTRICT/Surfaces/RequestAddSurface/ListRequestAddSurface";
 import RequestAddSurfaces from "../pages/WARD_DISTRICT/Surfaces/RequestAddSurface/RequestAddSurface";
 import ListSpaceNormal from "../pages/WARD_DISTRICT/Space/SpaceNormal/ListSpaceNormal";
+import SimpleLayout from "../layouts/SimpleLayout";
+import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurface";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -42,95 +44,103 @@ const ThemeRoutes = [
       {
         path: "/danh-sach-bao-cao-dia-diem",
         exact: true,
-        element: < ReportSpaces/>,
+        element: <ProtectedRoute> <ReportSpaces/> </ProtectedRoute>,
       },
       {
         path: "/danh-sach-bao-cao-bang-quang-cao",
         exact: true,
-        element: < ListReportSurface/>,
+        element: <ProtectedRoute> < ListReportSurface/></ProtectedRoute>,
       },
       {
         path: "/them-yeu-cau-chinh-sua-bang-quang-cao/:surfaceId",
         exact: true,
-        element: < AddRequestEditSurfaces/>,
+        element: <ProtectedRoute> <AddRequestEditSurfaces/></ProtectedRoute>
       },
       {
         path: "/them-yeu-cau-chinh-sua-dia-diem/:spacesId",
         exact: true,
-        element: < RequestReportSpaces/>,
+        element: <ProtectedRoute>< RequestReportSpaces/></ProtectedRoute>,
       },
 
       {
         path: "/danh-sach-yeu-cau-chinh-sua",
         exact: true,
-        element: < ListReportSpacesByUser/>,
+        element: <ProtectedRoute>< ListReportSpacesByUser/></ProtectedRoute>,
       },
       {
         path: "/chinh-sua-thong-tin-ca-nhan",
         exact: true,
         element: <EditProfile />
       },
-      {
-        path: "/quen-mat-khau",
-        exact: true,
-        element: <ForgotPassword />
-      },
 
       {
         path: "/quang-ly-quan-phuong",
         exact: true,
-        element: < ManageWardDistrict />,
+        element: <ProtectedRoute>< ManageWardDistrict /></ProtectedRoute>,
       },
       {
         path: "/quang-ly-cac-loai-hinh-thuc",
         exact: true,
-        element: < ManageAllTypesOfForms />,
+        element: <ProtectedRoute>< ManageAllTypesOfForms /></ProtectedRoute>,
       },
       {
         path: "/quang-ly-diem-dat-quang-cao",
         exact: true,
-        element: < ManageSpace />,
+        element: <ProtectedRoute>< ManageSpace /></ProtectedRoute>,
       },
       {
         path: "/chinh-sua-diem-dat-quang-cao/:spacesId",
         exact: true,
-        element: < EditSpace/>,
+        element: <ProtectedRoute>< EditSpace/></ProtectedRoute>,
       },
       {
         path: "/danh-sach-dia-diem-quang-cao",
         exact: true,
-        element: < ListRequestAddSpaces />,
+        element: <ProtectedRoute>< ListRequestAddSpaces /></ProtectedRoute>,
       },
       {
         path: "/yeu-cau-them-diadiem-quang-cao",
         exact: true,
-        element: < RequestAddSpaces />,
+        element: <ProtectedRoute>< RequestAddSpaces /></ProtectedRoute>,
       },
       {
         path: "/yeu-cau-chinh-sua-dia-diem-quang-cao/:requestSpaceId",
         exact: true,
-        element: < RequestEditSpaces />,
+        element: <ProtectedRoute>< RequestEditSpaces /></ProtectedRoute>,
       },
       {
         path: "/danh-sach-yeu-cau-them-bang-quang-cao/:spaceId",
         exact: true,
-        element: < ListRequestAddSurfaces />,
+        element: <ProtectedRoute>< ListRequestAddSurfaces /></ProtectedRoute>,
+      },{
+        path: "/yeu-cau-chinh-sua-bang-quang-cao/:surfaceId",
+        exact: true,
+        element:<ProtectedRoute> < RequestEditSurface /></ProtectedRoute>,
       },
       {
         path: "/them-yeu-cau-them-bang-quang-cao/:spaceId",
         exact: true,
-        element: < RequestAddSurfaces />,
+        element: <ProtectedRoute>< RequestAddSurfaces /></ProtectedRoute>,
       },
       {
         path: "/danh-sach-dia-diem",
         exact: true,
-        element: < ListSpaceNormal />,
+        element: <ProtectedRoute>< ListSpaceNormal /></ProtectedRoute>,
       },
       ]
     },
   { path: "*", element: <NotFound /> },
-
-  { path: "/login", element: <LoginPage /> }
+  {
+    path: '/login', element: <LoginPage/>
+  },
+  {
+    path: "/quen-mat-khau", element: <SimpleLayout /> , children: [{
+      path: "/quen-mat-khau",
+      exact: true,
+      element: <ForgotPassword />
+      }
+    ]
+  }
 ];
 
 export default ThemeRoutes;

@@ -69,7 +69,6 @@ const Header = () => {
           )}
         </Button>
       </div>
-
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           
@@ -91,6 +90,7 @@ const Header = () => {
           </DropdownMenu>
         </Dropdown>
       </Collapse>
+
     </Navbar>
   );
 };
