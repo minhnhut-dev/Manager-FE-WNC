@@ -31,8 +31,8 @@ const Sidebar = () => {
           icon: "bi bi-card-text",
         },
         {
-          title: "Danh sách điểm đặt quảng cáo",
-          href: "#",
+          title: "Danh sách điểm đặt quảng cáo, bảng quảng cáo",
+          href: "/danh-sach-dia-diem",
           icon: "bi bi-card-text",
         }
         )

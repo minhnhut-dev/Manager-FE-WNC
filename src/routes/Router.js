@@ -19,6 +19,8 @@ import ListRequestAddSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpa
 import RequestAddSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpaces/RequestAddSpaces";
 import RequestEditSpaces from "../pages/WARD_DISTRICT/Space/RequestAddEditSpaces/RequestEditSpaces";
 import ListRequestAddSurfaces from "../pages/WARD_DISTRICT/Surfaces/RequestAddSurface/ListRequestAddSurface";
+import RequestAddSurfaces from "../pages/WARD_DISTRICT/Surfaces/RequestAddSurface/RequestAddSurface";
+import ListSpaceNormal from "../pages/WARD_DISTRICT/Space/SpaceNormal/ListSpaceNormal";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -113,8 +115,17 @@ const ThemeRoutes = [
         path: "/danh-sach-yeu-cau-them-bang-quang-cao/:spaceId",
         exact: true,
         element: < ListRequestAddSurfaces />,
-      }
-
+      },
+      {
+        path: "/them-yeu-cau-them-bang-quang-cao/:spaceId",
+        exact: true,
+        element: < RequestAddSurfaces />,
+      },
+      {
+        path: "/danh-sach-dia-diem",
+        exact: true,
+        element: < ListSpaceNormal />,
+      },
       ]
     },
   { path: "*", element: <NotFound /> },

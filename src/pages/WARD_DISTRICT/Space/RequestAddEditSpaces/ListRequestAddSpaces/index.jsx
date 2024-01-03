@@ -124,11 +124,11 @@ const RequestAddSpaces = () => {
                                <i className="bi bi-trash-fill"></i>
                              </button>
                          }
-                         <Link to={`/them-yeu-cau-chinh-sua-dia-diem/${tdata.id}`}>
-                           <button className="btn btn-primary btn-sm">
-                                Xem các bảng quảng cáo
-                           </button>
-                         </Link>
+                         {/*<Link to={`/danh-sach-yeu-cau-them-bang-quang-cao/${tdata?.id}`}>*/}
+                         {/*  <button className="btn btn-primary btn-sm">*/}
+                         {/*       Xem các bảng quảng cáo*/}
+                         {/*  </button>*/}
+                         {/*</Link>*/}
                        </td>
                      </tr>
                  ))}

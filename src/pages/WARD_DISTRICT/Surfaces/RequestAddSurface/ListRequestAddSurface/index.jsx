@@ -7,7 +7,7 @@ import {
   getReportStateColor, hiddenActionDeleteByReportState,
   hiddenActionEditByReportState
 } from "../../../../../constanst";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import AppContext from "../../../../../constanst/Context/appContext";
 import {axiosService} from "../../../../../services/axiosServices";
 import {
@@ -17,22 +17,21 @@ import {
 } from "../../../../../constanst/WARD_DISTRICT";
 import Swal from "sweetalert2";
 const ListRequestAddSurfaces = () => {
+  const {spaceId} =useParams();
 
   const [listRequestAddSpaces, setListRequestAddSpaces] = useState([]);
 
   const handleLoadListRequestAddSpaces = async () => {
-    const response = await  axiosService.get(`/temp-space`);
+    const response = await  axiosService.get(`/temp-surface/space/${spaceId}`);
     return response;
   }
 
   const deleteRequestAddSpaces = async (id) => {
     const response = await axiosService.delete(`/temp-space/${id}`);
     return response;
-
   }
 
   const handleDeleteRequestAddSpaces = (id) => {
-
     Swal.fire({
       icon: 'question',
       title: 'Bạn có muốn xoá yêu cầu này không?',
@@ -77,7 +76,7 @@ const ListRequestAddSurfaces = () => {
                 <CardTitle tag="h3" className="fw-bolder">
                   Danh sách yêu cầu tạo bảng quảng cáo
                 </CardTitle>
-                <Link to="/yeu-cau-them-diadiem-quang-cao">
+                <Link to={`/them-yeu-cau-them-bang-quang-cao/${spaceId}`}>
                   <Button color={"success"}>
                     Thêm yêu cầu tạo bảng quảng cáo mới
                   </Button>
@@ -90,7 +89,7 @@ const ListRequestAddSurfaces = () => {
                     <th>Loại hình quảng cáo</th>
                     <th>Địa chỉ điểm đặt</th>
                     <th>Hình ảnh</th>
-                    <th>Loại vị trí</th>
+                    <th>Kích thước</th>
                     <th>Trạng thái</th>
                     <th>Chức năng</th>
                   </tr>
@@ -104,16 +103,16 @@ const ListRequestAddSurfaces = () => {
                         <td>
                           <div className="d-flex align-items-center p-2">
                             <div className="ms-3">
-                              <h6 className="mb-0">{tdata?.formAdvertising.name}</h6>
+                              <h6 className="mb-0">{tdata?.surfaceType.name}</h6>
                             </div>
                           </div>
                         </td>
-                        <td>{tdata?.address}</td>
+                        <td>{tdata?.space?.address}</td>
                         <td>
                           <img alt="img" src={API_URL + fixUrl(tdata?.imgUrl)} className="rounded-circle" width="35"/>
                         </td>
                         <td>
-                          {tdata?.locationTypes?.name}
+                          {tdata?.width} x {tdata?.height}
                         </td>
                         <td>
                          <span
@@ -125,11 +124,11 @@ const ListRequestAddSurfaces = () => {
                                 <i className="bi bi-trash-fill"></i>
                               </button>
                           }
-                          <Link to={`/them-yeu-cau-chinh-sua-dia-diem/${tdata.id}`}>
-                            <button className="btn btn-primary btn-sm">
-                              Xem các bảng quảng cáo
-                            </button>
-                          </Link>
+                          {/*<Link to={`#`}>*/}
+                          {/*  <button className="btn btn-primary btn-sm">*/}
+                          {/*    Xem các bảng quảng cáo*/}
+                          {/*  </button>*/}
+                          {/*</Link>*/}
                         </td>
                       </tr>
                   ))}

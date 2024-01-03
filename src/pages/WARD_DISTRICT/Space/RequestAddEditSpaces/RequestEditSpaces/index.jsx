@@ -142,7 +142,7 @@ const RequestEditSpaces = () => {
                         <Label for="imgUrl">Hình Ảnh</Label>
                         <input type="file" name="imgUrl" id="imgUrl" onChange={(event) => {
                           setFieldValue("imgUrl", event.currentTarget.files[0]);
-                        }} required={true}/>
+                        }} required={true} className={"form-control"}/>
                       </FormGroup>
                       <FormGroup>
                         <Label for="lat">Vĩ độ</Label>

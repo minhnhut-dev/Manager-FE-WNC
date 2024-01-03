@@ -19,7 +19,7 @@ const ReportSpaces = () => {
     let [listReportSpaces,setListReportSpaces] = useState([]);
     const handleDeleteReportSpaces = async (reportId)=> {
         try {
-            const response = await axiosService.get(`reports-space/update-state-report-space-delete/${reportId}`);
+            const response = await axiosService.delete(`/reports-surface/${reportId}`);
             const { data } = response;
             return data;
         } catch (error) {
@@ -47,12 +47,7 @@ const ReportSpaces = () => {
                             icon: "success",
                             title: "Xoá thành công",
                         });
-                        let newListReportSpaces = listReportSpaces.map(item => {
-                            if(item.id === reportId){
-                                item.state = data.state;
-                            }
-                            return item;
-                        });
+                        let newListReportSpaces = listReportSpaces.filter(item => item.id != reportId);
                         setListReportSpaces((newListReportSpaces));
                     }else{
                         showAlert({

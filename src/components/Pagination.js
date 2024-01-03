@@ -2,7 +2,6 @@ import React from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 export default function Paginate({ meta, setCurrentPage, currentPage}) {
-  // const [currentPage, setCurrentPage] = React.useState(1);
   const handlePagination = (currentPage) => {
     setCurrentPage(currentPage);
   };
