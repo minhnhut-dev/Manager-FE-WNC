@@ -79,7 +79,12 @@ const Sidebar = () => {
             icon: "bi bi-map",
         },
         {
-          title: "Xem và xét duyệt yêu cầu cấp phép quảng cáo",
+          title: "Xem và xét duyệt yêu cầu cấp phép điểm quảng cáo (temp_space)",
+          href: "/xem-va-xet-duyet-yeu-cau-cap-phep-diem-quang-cao",
+          icon: "bi bi-person-circle",
+        },
+        {
+          title: "Xem và xét duyệt yêu cầu cấp phép bảng quảng cáo (temp_surface)",
           href: "#",
           icon: "bi bi-check2-circle",
         },

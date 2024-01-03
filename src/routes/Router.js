@@ -25,6 +25,7 @@ import SimpleLayout from "../layouts/SimpleLayout";
 import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurface";
 
 import ListReportSurfaceFromUser from "../pages/Department/ListReportSurfaceFromUser";
+import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingSpace"
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -69,11 +70,18 @@ const ThemeRoutes = [
         exact: true,
         element: <ProtectedRoute>< ListReportSpacesByUser/></ProtectedRoute>,
       },
+      //baotran
       {
         path: "/xet-duyet-bao-cao-bang-quang-cao-tu-nguoi-dan",
         exact: true,
         element: <ProtectedRoute>< ListReportSurfaceFromUser/></ProtectedRoute>,
       },
+      {
+        path: "/xem-va-xet-duyet-yeu-cau-cap-phep-diem-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ApprovalAndLicensingSpace/></ProtectedRoute>,
+      },
+      //
       {
         path: "/chinh-sua-thong-tin-ca-nhan",
         exact: true,
