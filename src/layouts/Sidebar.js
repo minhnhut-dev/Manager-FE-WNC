@@ -73,6 +73,7 @@ const Sidebar = () => {
             href: "/danh-sach-yeu-cau-chinh-sua",
             icon: "bi bi-pencil-square",
         },
+        //baotran
         {
             title: "Xét duyệt báo cáo bảng quảng cáo từ người dân",
             href: "/xet-duyet-bao-cao-bang-quang-cao-tu-nguoi-dan",
@@ -85,7 +86,7 @@ const Sidebar = () => {
         },
         {
           title: "Xem và xét duyệt yêu cầu cấp phép bảng quảng cáo (temp_surface)",
-          href: "#",
+          href: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
           icon: "bi bi-check2-circle",
         },
         {

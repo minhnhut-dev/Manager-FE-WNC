@@ -25,7 +25,8 @@ import SimpleLayout from "../layouts/SimpleLayout";
 import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurface";
 
 import ListReportSurfaceFromUser from "../pages/Department/ListReportSurfaceFromUser";
-import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingSpace"
+import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingSpace";
+import ApprovalAndLicensingSurface from "../pages/Department/ApprovalAndLicensingSurface";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -80,6 +81,11 @@ const ThemeRoutes = [
         path: "/xem-va-xet-duyet-yeu-cau-cap-phep-diem-quang-cao",
         exact: true,
         element: <ProtectedRoute>< ApprovalAndLicensingSpace/></ProtectedRoute>,
+      },
+      {
+        path: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ApprovalAndLicensingSurface /></ProtectedRoute>,
       },
       //
       {
