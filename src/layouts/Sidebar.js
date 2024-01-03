@@ -75,7 +75,7 @@ const Sidebar = () => {
         },
         {
             title: "Xét duyệt báo cáo bảng quảng cáo từ người dân",
-            href: "#",
+            href: "/xet-duyet-bao-cao-bang-quang-cao-tu-nguoi-dan",
             icon: "bi bi-map",
         },
         {

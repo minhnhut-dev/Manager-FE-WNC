@@ -24,6 +24,8 @@ import ListSpaceNormal from "../pages/WARD_DISTRICT/Space/SpaceNormal/ListSpaceN
 import SimpleLayout from "../layouts/SimpleLayout";
 import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurface";
 
+import ListReportSurfaceFromUser from "../pages/Department/ListReportSurfaceFromUser";
+
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -66,6 +68,11 @@ const ThemeRoutes = [
         path: "/danh-sach-yeu-cau-chinh-sua",
         exact: true,
         element: <ProtectedRoute>< ListReportSpacesByUser/></ProtectedRoute>,
+      },
+      {
+        path: "/xet-duyet-bao-cao-bang-quang-cao-tu-nguoi-dan",
+        exact: true,
+        element: <ProtectedRoute>< ListReportSurfaceFromUser/></ProtectedRoute>,
       },
       {
         path: "/chinh-sua-thong-tin-ca-nhan",
