@@ -53,11 +53,13 @@ const Sidebar = () => {
           href: "/quang-ly-diem-dat-quang-cao",
           icon: "bi bi-map",
         },
+        //baotran
         {
           title: "Quản lý các bảng quảng cáo",
-          href: "#",
+          href: "/quan-ly-bang-quang-cao",
           icon: "bi bi-signpost-2",
         },
+        //
         // {
         //   title: "Xét duyệt yêu cầu chỉnh sửa điểm quảng cáo",
         //   href: "#",
@@ -89,6 +91,7 @@ const Sidebar = () => {
           href: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
           icon: "bi bi-check2-circle",
         },
+        //
         {
           title: "Tạo tài khoản cho cán bộ Phường, Quận và phân công",
           href: "#",

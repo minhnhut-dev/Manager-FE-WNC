@@ -27,6 +27,8 @@ import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurfa
 import ListReportSurfaceFromUser from "../pages/Department/ListReportSurfaceFromUser";
 import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingSpace";
 import ApprovalAndLicensingSurface from "../pages/Department/ApprovalAndLicensingSurface";
+import ManageSurface from "../pages/Department/ManageSurface";
+import EditSurface from "../pages/Department/ManageSurface/EditSurface";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -86,6 +88,16 @@ const ThemeRoutes = [
         path: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
         exact: true,
         element: <ProtectedRoute>< ApprovalAndLicensingSurface /></ProtectedRoute>,
+      },
+      {
+        path: "/quan-ly-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ManageSurface /></ProtectedRoute>,
+      },
+      {
+        path: "/chinh-sua-bang-quang-cao/:surfaceId",
+        exact: true,
+        element: <ProtectedRoute>< EditSurface/></ProtectedRoute>,
       },
       //
       {
