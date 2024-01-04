@@ -24,6 +24,12 @@ import ListSpaceNormal from "../pages/WARD_DISTRICT/Space/SpaceNormal/ListSpaceN
 import SimpleLayout from "../layouts/SimpleLayout";
 import RequestEditSurface from "../pages/WARD_DISTRICT/Surfaces/RequestEditSurface";
 
+import ListReportSurfaceFromUser from "../pages/Department/ListReportSurfaceFromUser";
+import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingSpace";
+import ApprovalAndLicensingSurface from "../pages/Department/ApprovalAndLicensingSurface";
+import ManageSurface from "../pages/Department/ManageSurface";
+import EditSurface from "../pages/Department/ManageSurface/EditSurface";
+
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -67,6 +73,33 @@ const ThemeRoutes = [
         exact: true,
         element: <ProtectedRoute>< ListReportSpacesByUser/></ProtectedRoute>,
       },
+      //baotran
+      {
+        path: "/xet-duyet-bao-cao-bang-quang-cao-tu-nguoi-dan",
+        exact: true,
+        element: <ProtectedRoute>< ListReportSurfaceFromUser/></ProtectedRoute>,
+      },
+      {
+        path: "/xem-va-xet-duyet-yeu-cau-cap-phep-diem-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ApprovalAndLicensingSpace/></ProtectedRoute>,
+      },
+      {
+        path: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ApprovalAndLicensingSurface /></ProtectedRoute>,
+      },
+      {
+        path: "/quan-ly-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ManageSurface /></ProtectedRoute>,
+      },
+      {
+        path: "/chinh-sua-bang-quang-cao/:surfaceId",
+        exact: true,
+        element: <ProtectedRoute>< EditSurface/></ProtectedRoute>,
+      },
+      //
       {
         path: "/chinh-sua-thong-tin-ca-nhan",
         exact: true,

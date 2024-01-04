@@ -133,7 +133,7 @@ const ListReportSpacesByUser = () => {
                            <tr>
                                <th>Thông tin người báo cáo</th>
                                <th>Lý do</th>
-                               <th>Loại hình quảng cáo</th>
+                               <th>Loại hình báo cáo</th>
                                <th>Địa chỉ quảng cáo</th>
                                <th>Hình ảnh</th>
                                <th>Trạng thái</th>
