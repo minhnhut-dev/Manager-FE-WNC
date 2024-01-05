@@ -14,7 +14,7 @@ const ManageSurface = () => {
 
   const handleDataSurface = async () => {
     try {
-      const { data } = await axiosService.get(`/surfaces/pagination?page=${onPageChange}&limit=10`);
+      const { data } = await axiosService.get(`/surfaces?page=1&limit=100`);
       return data;
     } catch (error) {
       throw (error);
@@ -28,7 +28,6 @@ const ManageSurface = () => {
     });
   }, [onPageChange]);
 
-  
   const renderingListSurface = () => {
     return (
       surface.map((item, index) => (

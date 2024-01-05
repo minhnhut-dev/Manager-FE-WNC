@@ -148,13 +148,13 @@ const ListReportSurfaceFromUser = () => {
                                         <td>
                                             <div className="d-flex align-items-center p-2">
                                                 <div className="ms-3">
-                                                    <h6 className="mb-0">{tdata.reportSurface.name}</h6>
-                                                    <span className="text-muted">{tdata.reportSurface.email}</span>
+                                                    <h6 className="mb-0">{tdata?.reportSurface?.name}</h6>
+                                                    <span className="text-muted">{tdata?.reportSurface?.email}</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>{tdata?.reason}</td>
-                                        <td>{tdata?.reportSurface.formReport.name}</td>
+                                        <td>{tdata?.reportSurface?.formReport?.name}</td>
 
                                         <td>{tdata?.height}m X {tdata?.width}m</td>
                                         <td>{tdata?.surfaceType.name}</td>
