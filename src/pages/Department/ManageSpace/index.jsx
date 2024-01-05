@@ -1,4 +1,18 @@
-import { Card, CardBody, CardTitle, Container, Table, Row, Col, Button, Pagination, PaginationItem, PaginationLink, Input } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  Container,
+  Table,
+  Row,
+  Col,
+  Button,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Input,
+  CardLink
+} from 'reactstrap';
 import React, { useEffect, useState } from 'react'
 import { axiosService } from "../../../services/axiosServices";
 import { API_URL, fixUrl } from "../../../constanst";
@@ -87,8 +101,6 @@ const ManageSpace = () => {
         return pagination;
     }
 
-
-
     return (
         <div>
             <Container>
@@ -97,9 +109,9 @@ const ManageSpace = () => {
                         <CardBody>
                             <CardTitle className="d-flex justify-content-center" tag="h3">Quản lý điểm đặt quảng cáo
                             </CardTitle>
-                          <CardTitle>
+                          <CardLink href={"/them-dia-diem"}>
                             <Button color="success" >Thêm điểm đặt quảng cáo</Button>
-                          </CardTitle>
+                          </CardLink>
                             <Table>
                                 <thead>
                                     <tr>

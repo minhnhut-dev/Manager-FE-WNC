@@ -7,6 +7,7 @@ import AppContext from "../../../../constanst/Context/appContext";
 import "./map.scss";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import {axiosService} from "../../../../services/axiosServices";
+import Swal from "sweetalert2";
 const Map = ({onBindingLatLong, handleMovetoFormInput}) => {
   const {currentUser} = useContext(AppContext);
 
@@ -72,7 +73,15 @@ const Map = ({onBindingLatLong, handleMovetoFormInput}) => {
           handleMovetoFormInput();
           popup.remove();
         })
-      })
+      }).catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Không tìm thấy địa điểm!',
+          confirmButtonText: 'Đồng ý',
+        })
+        console.log(error);
+      });
    })
   }, []);
   

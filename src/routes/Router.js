@@ -31,6 +31,7 @@ import ManageSurface from "../pages/Department/ManageSurface";
 import EditSurface from "../pages/Department/ManageSurface/EditSurface";
 import ListUser from "../pages/Department/ManagerUser/ListUser";
 import AddUser from "../pages/Department/ManagerUser/AddUser";
+import AddSpaces from "../pages/Department/ManageSpace/AddSpace";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -171,6 +172,11 @@ const ThemeRoutes = [
         path: "/them-nguoi-dung",
         exact: true,
         element: <ProtectedRoute>< AddUser /></ProtectedRoute>
+      },
+      {
+        path: "/them-dia-diem",
+        exact: true,
+        element: <ProtectedRoute>< AddSpaces /></ProtectedRoute>,
       }
       ]
     },

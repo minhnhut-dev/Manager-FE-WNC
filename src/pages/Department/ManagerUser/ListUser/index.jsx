@@ -43,7 +43,7 @@ const ListReportSpacesByUser = () => {
               <CardTitle tag="h4" className="fw-bold">
                 Danh sách người dùng
               </CardTitle>
-              <CardLink href={"/tao-nguoi-dung"}>
+              <CardLink href={"/them-nguoi-dung"}>
                 <Button color={"success"}>Thêm người dùng</Button>
               </CardLink>
               <Table className="no-wrap mt-3 align-middle" responsive borderless>

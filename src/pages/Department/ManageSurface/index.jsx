@@ -22,9 +22,9 @@ const ManageSurface = () => {
   }
   useEffect(() => {
     handleDataSurface().then((data) => {
-      setSurface(data.data);
-      setNumOfPage(data.pagination.lastPage);
-      setCurrentPage(data.pagination.currentPage);
+      setSurface(data);
+      // setNumOfPage(data.pagination.lastPage);
+      // setCurrentPage(data.pagination.currentPage);
     });
   }, [onPageChange]);
 
@@ -52,37 +52,37 @@ const ManageSurface = () => {
     );
 }
 
-  const renderPagination = () => {
-    const pagination = [];
-    const nextPage = currentPage + 1 > numOfPage ? null : currentPage + 1;
-    const prevPage = currentPage - 1 < 1 ? null : currentPage - 1;
-    pagination.push(
-      <PaginationItem >
-        <PaginationLink
-          first
-          onClick={() => setOnPageChange(prevPage)}
-        />
-      </PaginationItem>
-    )
-    for (let i = 1; i <= numOfPage; i++) {
-      pagination.push(
-        <PaginationItem>
-          <PaginationLink onClick={() => setOnPageChange(i)}>
-            {i}
-          </PaginationLink>
-        </PaginationItem>
-      )
-    }
-    pagination.push(
-      <PaginationItem>
-        <PaginationLink
-          onClick={() => setOnPageChange(nextPage)}
-          next
-        />
-      </PaginationItem>
-    )
-    return pagination;
-  }
+  // const renderPagination = () => {
+  //   const pagination = [];
+  //   const nextPage = currentPage + 1 > numOfPage ? null : currentPage + 1;
+  //   const prevPage = currentPage - 1 < 1 ? null : currentPage - 1;
+  //   pagination.push(
+  //     <PaginationItem >
+  //       <PaginationLink
+  //         first
+  //         onClick={() => setOnPageChange(prevPage)}
+  //       />
+  //     </PaginationItem>
+  //   )
+  //   for (let i = 1; i <= numOfPage; i++) {
+  //     pagination.push(
+  //       <PaginationItem>
+  //         <PaginationLink onClick={() => setOnPageChange(i)}>
+  //           {i}
+  //         </PaginationLink>
+  //       </PaginationItem>
+  //     )
+  //   }
+  //   pagination.push(
+  //     <PaginationItem>
+  //       <PaginationLink
+  //         onClick={() => setOnPageChange(nextPage)}
+  //         next
+  //       />
+  //     </PaginationItem>
+  //   )
+  //   return pagination;
+  // }
 
 
 
@@ -114,9 +114,9 @@ const ManageSurface = () => {
                   {renderingListSurface()}
                 </tbody>
               </Table>
-              <Pagination className="d-flex justify-content-center">
-                {renderPagination()}
-              </Pagination>
+              {/*<Pagination className="d-flex justify-content-center">*/}
+              {/*  {renderPagination()}*/}
+              {/*</Pagination>*/}
 
             </CardBody>
           </Card>
