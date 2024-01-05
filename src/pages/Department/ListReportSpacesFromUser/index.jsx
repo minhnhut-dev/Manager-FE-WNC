@@ -152,9 +152,9 @@ const ListReportSpacesByUser = () => {
                                        </div>
                                    </td>
                                    <td>{tdata?.reason}</td>
-                                   <td>{tdata?.reportSpace.formReport.name}</td>
+                                   <td>{tdata?.reportSpace.formReport?.name}</td>
 
-                                   <td>{tdata?.reportSpace.space.address}</td>
+                                   <td>{tdata?.reportSpace.space?.address}</td>
                                    <td>
                                        <img alt="img" src={API_URL +  fixUrl(tdata?.imgUrl)} className="rounded-circle" width="35" />
                                    </td>

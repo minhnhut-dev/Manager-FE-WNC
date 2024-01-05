@@ -1,19 +1,19 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Card, Container, FormGroup, Label, Input, Button, CardSubtitle, Col} from "reactstrap";
 import * as Yup from 'yup';
 import {ErrorMessage, Field, Formik, Form} from 'formik';
 import Map from "../../../WARD_DISTRICT/Space/Component/Map";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {axiosService} from "../../../../services/axiosServices";
 import Swal from "sweetalert2";
 
-const AddSpaces = () => {
-  const {spacesId } = useParams();
+const AddSurface = () => {
   const formikRef = useRef();
   const formInput =useRef();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
+    reason: Yup.string().required('Lý do là bắt buộc'),
     latitude: Yup.number().required('Vĩ độ là bắt buộc'),
     longitude: Yup.number().required('Kinh độ là bắt buộc'),
     address: Yup.string().required('Địa chỉ là bắt buộc'),
@@ -27,16 +27,9 @@ const AddSpaces = () => {
     formikRef.current.setFieldValue('address', values.address);
     formikRef.current.setFieldValue('ward', values.ward);
     formikRef.current.setFieldValue('district', values.district);
-    formikRef.current.setFieldValue('zone', values.zone);
   }
-
-  const loadSpace = async () => {
-    const response = await axiosService.get(`/spaces/${spacesId}`);
-    const {data} = response;
-    return data;
-  }
-  const handleEditSpaces = (params) => {
-    const response = axiosService.put(`/spaces/${spacesId}`, params, {
+  const handleAddSpaces = (params) => {
+    const response = axiosService.post("/spaces", params, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -45,6 +38,7 @@ const AddSpaces = () => {
   }
   const handleSubmit = async (values, {setSubmitting}) => {
     const params = {
+      reason: values.reason,
       zone: values.zone,
       latitude: values.latitude,
       longitude: values.longitude,
@@ -56,6 +50,7 @@ const AddSpaces = () => {
       district: values?.district
     }
     const formData = new FormData();
+    formData.append('reason', params.reason);
     formData.append('zone', params.zone);
     formData.append('latitude', params.latitude);
     formData.append('longitude', params.longitude);
@@ -63,15 +58,15 @@ const AddSpaces = () => {
     formData.append('imgUrl', params.imgUrl);
     formData.append('formAdvertising', params.formAdvertising);
     formData.append('locationTypes', params.locationTypes);
-    formData.append('ward', params.ward|| null);
-    formData.append('district', params.district || null);
+    formData.append('ward', params.ward);
+    formData.append('district', params.district);
 
-    handleEditSpaces(formData).then((response) => {
+    handleAddSpaces(formData).then((response) => {
       const {status} = response;
       if (status === 200 || status === 201) {
         Swal.fire({
           icon: 'success',
-          title: 'Sửa địa điểm mới thành công',
+          title: 'Yêu cầu thêm địa điểm mới thành công',
           showConfirmButton: true,
         }).then((result) => {
           if(result.isConfirmed) {
@@ -82,7 +77,7 @@ const AddSpaces = () => {
     }).catch((error) => {
       Swal.fire({
         icon: 'error',
-        title: 'Không thể chỉnh sửa địa điểm',
+        title: 'Không thể thêm địa điểm',
         showConfirmButton: true,
       })
 
@@ -93,20 +88,10 @@ const AddSpaces = () => {
     formInput.current.scrollIntoView({behavior: 'smooth'});
   }
 
-  useEffect(() => {
-    loadSpace().then((data) => {
-      formikRef.current.setFieldValue('latitude', data.latitude);
-      formikRef.current.setFieldValue('longitude', data.longitude);
-      formikRef.current.setFieldValue('address', data.address);
-      formikRef.current.setFieldValue('ward', data.ward.id);
-      formikRef.current.setFieldValue('district', data.district.id);
-    });
-  }, []);
-
   return (
       <>
         <Container>
-          <h3 className={"fw-bolder"}>Chỉnh sửa địa điểm</h3>
+          <h3 className={"fw-bolder"}>Thêm địa điểm mới</h3>
           <Card className={"p-3"}>
             <CardSubtitle className={"fw-bolder"}>Hãy chọn 1 điểm cần đặt trên bảng đồ</CardSubtitle>
             <br/>
@@ -115,14 +100,18 @@ const AddSpaces = () => {
           <Card className={"p-3"} innerRef={formInput}>
             <Col md={12}>
               <Formik
-                  initialValues={{zone: '', imgUrl: null, latitude: '', longitude: '', address: ''}}
+                  initialValues={{ reason: '', zone: '', imgUrl: null, latitude: '', longitude: '', address: ''}}
                   validationSchema={validationSchema}
                   onSubmit={handleSubmit}
                   innerRef={formikRef}
               >
                 {({ isSubmitting, setFieldValue }) => (
                     <Form >
-
+                      <FormGroup>
+                        <Label for="reason">Mô Tả Lý Do</Label>
+                        <Field as={Input} type="textarea" name="reason" id="reason" placeholder="Nhập mô tả lý do"/>
+                        <ErrorMessage name="reason" component="div" className="text-danger" />
+                      </FormGroup>
 
                       <FormGroup>
                         <Label for="zone">Quy Hoạch</Label>
@@ -155,7 +144,7 @@ const AddSpaces = () => {
                         <Field as={Input} type="text" name="address" id="address" placeholder="Nhập địa chỉ" readOnly/>
                         <ErrorMessage name="address" component="div" className="text-danger" />
                       </FormGroup>
-                      <Button type="submit" color="primary" disabled={isSubmitting}>Thêm Yêu Cầu Chỉnh Sửa</Button>
+                      <Button type="submit" color="primary" disabled={isSubmitting}>Thêm</Button>
                     </Form>
                 )}
               </Formik>
@@ -166,4 +155,4 @@ const AddSpaces = () => {
   );
 };
 
-export default AddSpaces;
+export default AddSurface;

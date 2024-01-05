@@ -35,7 +35,7 @@ const ManageSurface = () => {
                 {/*<th scope="row">{item.id}</th>*/}
                 <td className="text-center">{item?.height}m X {item?.width}m</td>
                 <td className="text-center">{item?.surfaceType.name}</td>
-                <td className="text-center">{item?.space.address}</td>
+                <td className="text-center">{item?.space?.address}</td>
                 <td className="text-center">{moment(item?.expiryDate).subtract(10, 'days').calendar()}</td>
                 <td className="text-center">
                     <img alt="img" src={API_URL + fixUrl(item?.imgUrl)} className="rounded-circle" width="35" />

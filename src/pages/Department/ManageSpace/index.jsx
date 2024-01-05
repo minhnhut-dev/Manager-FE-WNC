@@ -17,6 +17,7 @@ import React, { useEffect, useState } from 'react'
 import { axiosService } from "../../../services/axiosServices";
 import { API_URL, fixUrl } from "../../../constanst";
 import {Link} from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageSpace = () => {
     const [space, setSpace] = React.useState([]) // Khai báo 1 state, ban đầu là mảng rỗng
@@ -33,6 +34,37 @@ const ManageSpace = () => {
         }
     }
 
+    const removeSpaces= async (spacesId) => {
+      const response = await axiosService.delete(`/spaces/${spacesId}`);
+      return response;
+    }
+
+    const handleRemoveSpaces = (spacesId) => {
+      Swal.fire({
+        title: 'Bạn có muốn xoá?',
+        text: 'Bạn có muốn xoá không!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xoá'
+      }).then((result) => {
+        if(result.isConfirmed) {
+          removeSpaces(spacesId).then((data) => {
+            if(data.status === 200 ||  data.status === 201){
+              Swal.fire({
+                icon: "success",
+                title: "Xoá thành công",
+              });
+              let newListSpace = space.filter(item => item.id !== spacesId);
+              setSpace(newListSpace);
+            }
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
+      })
+    }
     useEffect(() => {
         handleDataSpace().then((data) => {
             setSpace(data.data);
@@ -59,10 +91,7 @@ const ManageSpace = () => {
                         <Link to={`/chinh-sua-diem-dat-quang-cao/${item.id}`}>
                             <Button color="primary">Chỉnh sửa</Button> {" "}
                         </Link>{" "}
-                      <Link to={`/chinh-sua-diem-dat-quang-cao/${item.id}`}>
-                        <Button color="primary">DS quảng cáo</Button> {" "}
-                      </Link>
-                        <Button color="danger">Xoá</Button>
+                        <Button color="danger" onClick={() => handleRemoveSpaces(item?.id)}>Xoá</Button>
                     </td>
                 </tr>
             ))

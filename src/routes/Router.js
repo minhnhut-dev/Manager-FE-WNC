@@ -177,7 +177,12 @@ const ThemeRoutes = [
         path: "/them-dia-diem",
         exact: true,
         element: <ProtectedRoute>< AddSpaces /></ProtectedRoute>,
-      }
+      },
+      {
+        path: "/them-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< AddSpaces /></ProtectedRoute>,
+      },
       ]
     },
   { path: "*", element: <NotFound /> },

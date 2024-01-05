@@ -93,7 +93,6 @@ const ApprovalAndLicensingSurface = () => {
             let newListTempSurfaces = listTempSurfaces.map(item => {
               if (item.id === reportId) {
                 item.state = 'Accepted';
-                console.log("item: ", item)
               }
               return item;
             });
@@ -148,8 +147,8 @@ const ApprovalAndLicensingSurface = () => {
                     <td>
                       <div className="d-flex align-items-center p-2">
                         <div className="ms-3">
-                          <h6 className="mb-0">{tdata.space.ward.name}</h6>
-                          <span className="text-muted">{tdata.space.district.name}</span>
+                          <h6 className="mb-0">{tdata.space?.ward?.name}</h6>
+                          <span className="text-muted">{tdata.space?.district?.name}</span>
                         </div>
                       </div>
                     </td>
@@ -157,7 +156,7 @@ const ApprovalAndLicensingSurface = () => {
                     <td>{tdata?.height}m X {tdata?.width}m</td>
 
                     <td>{tdata?.surfaceType.name}</td>
-                    <td>{tdata?.space.address}</td>
+                    <td>{tdata?.space?.address}</td>
 
                     <td>
                       <img alt="img" src={API_URL + fixUrl(tdata?.imgUrl)} className="rounded-circle" width="35" />
