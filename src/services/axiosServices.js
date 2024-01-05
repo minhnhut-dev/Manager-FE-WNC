@@ -10,6 +10,27 @@ const axiosInstance = axios.create({
   },
 });
 
+axiosInstance.interceptors.response.use(
+    response => {
+      // Do something with response data
+      return response;
+    },
+    error => {
+      // Do something with response error
+      if (!error.response) {
+        // Network error (server is down, CORS issues, etc)
+        console.error("Network error: ", error);
+      } else {
+        // HTTP status code error occurred
+        console.error(`HTTP error: ${error.response.status} - ${error.response.statusText}`);
+        // Optionally, you could emit an event or call a method to hide the overlay
+        // hideOverlay(); // Implement this function as needed
+      }
+      // You can still return Promise.reject to keep the error unhandled, or handle it accordingly
+      return Promise.reject(error);
+    }
+);
+
 const axiosService = {
   get: (url) => axiosInstance.get(url),
   post: (url, data) => axiosInstance.post(url, data),

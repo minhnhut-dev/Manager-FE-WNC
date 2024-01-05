@@ -29,6 +29,8 @@ import ApprovalAndLicensingSpace from "../pages/Department/ApprovalAndLicensingS
 import ApprovalAndLicensingSurface from "../pages/Department/ApprovalAndLicensingSurface";
 import ManageSurface from "../pages/Department/ManageSurface";
 import EditSurface from "../pages/Department/ManageSurface/EditSurface";
+import ListUser from "../pages/Department/ManagerUser/ListUser";
+import AddUser from "../pages/Department/ManagerUser/AddUser";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -160,6 +162,16 @@ const ThemeRoutes = [
         exact: true,
         element: <ProtectedRoute>< ListSpaceNormal /></ProtectedRoute>,
       },
+      {
+        path: "/danh-sach-nguoi-dung",
+        exact: true,
+        element: <ProtectedRoute>< ListUser /></ProtectedRoute>,
+      },
+      {
+        path: "/them-nguoi-dung",
+        exact: true,
+        element: <ProtectedRoute>< AddUser /></ProtectedRoute>
+      }
       ]
     },
   { path: "*", element: <NotFound /> },

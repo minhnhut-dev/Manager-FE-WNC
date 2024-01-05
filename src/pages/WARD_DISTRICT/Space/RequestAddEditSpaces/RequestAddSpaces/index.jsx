@@ -120,7 +120,7 @@ const RequestAddSpaces = () => {
                     <Label for="imgUrl">Hình Ảnh</Label>
                     <input type="file" name="imgUrl" id="imgUrl" onChange={(event) => {
                       setFieldValue("imgUrl", event.currentTarget.files[0]);
-                    }} required={true} className={"form-control"}/>
+                    }} required={true} className={"form-control"} accept=".png, .jpg, .jpeg, .webp" multiple={true}/>
                   </FormGroup>
                   <FormGroup>
                     <Label for="lat">Vĩ độ</Label>

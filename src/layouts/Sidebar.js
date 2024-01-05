@@ -94,9 +94,9 @@ const Sidebar = () => {
         //
         {
           title: "Tạo tài khoản cho cán bộ Phường, Quận và phân công",
-          href: "#",
+          href: "/danh-sach-nguoi-dung",
           icon: "bi bi-person-plus",
-        },
+        }
         )
   }
 
