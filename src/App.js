@@ -20,7 +20,7 @@ const App = memo(function App() {
     if(socket) {
       socket.on("createReportSpace", (data) => {
        alert("Có báo cáo mới");
-        console.log("connected");
+        console.log("**********data************", data);
       });
 
       // Optional: Handle socket disconnection or other events
