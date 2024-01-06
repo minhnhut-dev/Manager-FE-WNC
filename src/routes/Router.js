@@ -32,6 +32,7 @@ import EditSurface from "../pages/Department/ManageSurface/EditSurface";
 import ListUser from "../pages/Department/ManagerUser/ListUser";
 import AddUser from "../pages/Department/ManagerUser/AddUser";
 import AddSpaces from "../pages/Department/ManageSpace/AddSpace";
+import AddSurface from "../pages/Department/ManageSurface/AddSurface";
 
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
@@ -181,7 +182,12 @@ const ThemeRoutes = [
       {
         path: "/them-bang-quang-cao",
         exact: true,
-        element: <ProtectedRoute>< AddSpaces /></ProtectedRoute>,
+        element: <ProtectedRoute>< AddSurface /></ProtectedRoute>,
+      },
+      {
+        path: "/chinh-sua-bang-quang-cao/surfaceId",
+        exact: true,
+        element: <ProtectedRoute>< EditSurface /></ProtectedRoute>,
       },
       ]
     },
