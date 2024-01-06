@@ -47,6 +47,7 @@ function Map({optionsId, geoJSon}) {
         }
       });
 
+
       map.addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {

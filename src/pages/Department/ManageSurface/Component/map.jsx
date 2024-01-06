@@ -7,8 +7,9 @@ import AppContext from "../../../../constanst/Context/appContext";
 import "./map.scss";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import {axiosService} from "../../../../services/axiosServices";
-import Swal from "sweetalert2";
-const Map = ({onBindingLatLong, handleMovetoFormInput}) => {
+import {formatGeoJson} from "../../../../services/formatGeoJSON";
+
+const Map = ({onBindingLatLong, handleMovetoFormInput, geoJSON}) => {
   const {currentUser} = useContext(AppContext);
 
   mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
@@ -38,6 +39,36 @@ const Map = ({onBindingLatLong, handleMovetoFormInput}) => {
       zoom: 14,
     });
 
+    map.on("load", () => {
+      map.addSource('places', {
+        'type': 'geojson',
+        'data': formatGeoJson(geoJSON)
+      });
+
+      map.addLayer({
+        id: 'myDataCircles',
+        type: 'circle',
+        source: 'places',
+        paint: {
+          'circle-radius': 15,
+          "circle-color": "#11b4da",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#fff",
+        }
+      });
+
+      // Add a new layer to the map for the labels
+      map.addLayer({
+        id: 'myDataLabels',
+        type: 'symbol',
+        source: 'places',
+        layout: {
+          'text-field': 'QC',
+          'text-size': 9
+        }
+      });
+    });
+
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken, // Set the access token
       mapboxgl: mapboxgl, // Set the mapbox-gl instance
@@ -48,41 +79,42 @@ const Map = ({onBindingLatLong, handleMovetoFormInput}) => {
     });
 
     map.addControl(geocoder, "top-left");
-    let html = '';
-    map.on("click", (e) => {
-      reverseGeocode(e.lngLat.lat, e.lngLat.lng).then((response) => {
-        const {data} = response;
-        html = `
-          <div id="popup-content" class="card" style="width: 100%; display: block;">
-            <div class="card-header fw-bolder">
-              Cơ quan chính trị
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Địa chỉ</h5>
-              <p class="card-text">${data?.fullAddress}</p>
-              <button type="button" class="btn btn-primary btn-sm" id="select-space">Chọn</button>
-            </div>
-          </div>`;
-        const { lng, lat } = e.lngLat;
-        const popup =  new mapboxgl.Popup({ offset: 25, className: "custom-popup"})
-            .setLngLat([lng, lat])
-            .setHTML(html)
-            .addTo(map);
-        document.querySelector('#select-space').addEventListener("click", (e) => {
-          onBindingLatLong({lat: lat, lng: lng, address: data?.fullAddress, ward: data?.ward.id, district: data?.district?.id});
-          handleMovetoFormInput();
-          popup.remove();
-        })
-      }).catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Không tìm thấy địa điểm!',
-          confirmButtonText: 'Đồng ý',
-        })
-        console.log(error);
-      });
-    })
+
+    map.on("click",'myDataCircles', (e) => {
+      let html = '';
+      const { lng, lat } = e.lngLat;
+      let furthestFeature = e.features[0].properties;
+      html = `
+           <div id="popup-content" class="card" style="width: 100%; display: block;">
+             <div class="card-header fw-bolder">
+               ${furthestFeature?.formAdvertising}
+             </div>
+             <div class="card-body">
+               <h5 class="card-title">Địa chỉ</h5>
+               <p class="card-text">${furthestFeature?.full_address}</p>
+               <button type="button" class="btn btn-primary btn-sm" id="select-surface">Chọn</button>
+             </div>
+           </div>`;
+
+        let popup = new mapboxgl.Popup({ offset: 25, className: "custom-popup"})
+              .setLngLat([lng, lat])
+              .setHTML(html)
+              .addTo(map);
+          document.querySelector('#select-surface').addEventListener("click", (e) => {
+            onBindingLatLong({space: furthestFeature?.id, address: furthestFeature?.full_address});
+            handleMovetoFormInput();
+            popup.remove();
+          })
+    });
+
+    map.on('mouseenter', 'myDataCircles', function() {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // When the mouse leaves a feature in the 'placesCircles' layer, change the cursor style back to default
+    map.on('mouseleave', 'myDataCircles', function() {
+      map.getCanvas().style.cursor = '';
+    });
   }, []);
 
   return (

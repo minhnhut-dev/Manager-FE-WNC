@@ -1,9 +1,24 @@
-import { Card, CardBody, CardTitle, Container, Table, Row, Col, Button, Pagination, PaginationItem, PaginationLink, Input } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  Container,
+  Table,
+  Row,
+  Col,
+  Button,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Input,
+  CardLink
+} from 'reactstrap';
 import React, { useEffect, useState } from 'react'
 import { axiosService } from "../../../services/axiosServices";
 import { API_URL, fixUrl } from "../../../constanst";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 
 const ManageSurface = () => {
@@ -20,6 +35,46 @@ const ManageSurface = () => {
       throw (error);
     }
   }
+  const removeSurface = async (id) => {
+    try {
+      const response = await axiosService.delete(`/surfaces/${id}`);
+      return response;
+    } catch (error) {
+      throw (error);
+    }
+  }
+
+  const handleRemoveSurface = (id) => {
+    Swal.fire({
+      title: 'Bạn có chắc muốn xoá không?',
+      text: "Bạn sẽ không thể hoàn tác lại điều này!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+
+      confirmButtonText: 'Xoá',
+      cancelButtonText: 'Huỷ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeSurface(id).then((response) => {
+          const {status} = response;
+          if (status === 200) {
+            Swal.fire(
+                {
+                  icon: 'success',
+                  title: 'Xoá thành công',
+                  confirmButtonText: `OK`,
+                }
+            )
+            let newSurface = surface.filter((item) => item.id !== id);
+            setSurface(newSurface);
+          }
+        })
+      }
+    })
+
+  }
   useEffect(() => {
     handleDataSurface().then((data) => {
       setSurface(data);
@@ -32,7 +87,6 @@ const ManageSurface = () => {
     return (
       surface.map((item, index) => (
             <tr key={index}>
-                {/*<th scope="row">{item.id}</th>*/}
                 <td className="text-center">{item?.height}m X {item?.width}m</td>
                 <td className="text-center">{item?.surfaceType.name}</td>
                 <td className="text-center">{item?.space?.address}</td>
@@ -43,9 +97,9 @@ const ManageSurface = () => {
                 <td className="text-center" style={{ whiteSpace: 'nowrap' }}>
                     <Link to={`/chinh-sua-bang-quang-cao/${item.id}`}>
                         <Button color="primary">Chỉnh sửa</Button> {" "}
-                    </Link>{" "}
+                    </Link>
                   
-                    <Button color="danger">Xoá</Button>
+                    <Button color="danger" onClick={() => handleRemoveSurface(item?.id)}>Xoá</Button>
                 </td>
             </tr>
         ))
@@ -84,9 +138,6 @@ const ManageSurface = () => {
   //   return pagination;
   // }
 
-
-
-
   return (
     <div>
       <Container>
@@ -95,13 +146,12 @@ const ManageSurface = () => {
             <CardBody>
               <CardTitle className="d-flex justify-content-center" tag="h3">Quản lý bảng quảng cáo
               </CardTitle>
-              <CardTitle>
+              <CardLink href={"/them-bang-quang-cao"}>
                 <Button color="success" >Thêm điểm bảng quảng cáo</Button>
-              </CardTitle>
+              </CardLink>
               <Table>
                 <thead>
                   <tr>
-                    {/*<th className="text-center">#</th>*/}
                     <th className="text-center">Kích thước (height - width)</th>
                     <th className="text-center">Loại bảng quảng cáo</th>
                     <th className="text-center">Thuộc điểm đặt ở</th>
