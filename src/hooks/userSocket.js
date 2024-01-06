@@ -9,7 +9,6 @@ const useSocket = (currentUser) => {
   console.log(currentUser);
   useEffect(() => {
     if (isEmpty(currentUser)) return;
-
     // Initialize socket connection
     const newSocket = io(SOCKET_SERVER_URL, {
       transports: ["polling"],
@@ -21,6 +20,7 @@ const useSocket = (currentUser) => {
         },
       },
     });
+    console.log(newSocket)
 
     setSocket(newSocket);
 

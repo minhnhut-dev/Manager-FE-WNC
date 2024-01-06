@@ -6,6 +6,8 @@ import "moment/locale/vi";
 import {React, useEffect, useState} from "react";
 import { memo } from "react";
 import useSocket from "./hooks/userSocket";
+import Notification from "./components/Notification/Notification";
+import {notifySuccess} from "./services/toastServices";
 
 let currentUserFromLocalStorage =
   JSON.parse(localStorage.getItem("manager-spaces")) || null;
@@ -19,8 +21,9 @@ const App = memo(function App() {
   useEffect(() => {
     if(socket) {
       socket.on("createReportSpace", (data) => {
-       alert("Có báo cáo mới");
-        console.log("**********data************", data);
+        notifySuccess("Có báo cáo mới");
+       // alert("Có báo cáo mới");
+       //  console.log("**********data************", data);
       });
 
       // Optional: Handle socket disconnection or other events
@@ -37,6 +40,7 @@ const App = memo(function App() {
   return (
     <AppContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className="dark">{routing}</div>
+      <Notification />
     </AppContext.Provider>
   );
 });

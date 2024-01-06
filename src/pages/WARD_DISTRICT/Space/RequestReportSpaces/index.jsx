@@ -6,6 +6,7 @@ import {API_URL, fixUrl} from "../../../../constanst";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Formik, Form } from "formik";
 import useSweetAlert from "../../../../hooks/useSweetAlert";
+import Swal from "sweetalert2";
 
 const RequestReportSpaces = () => {
     const nagigate = useNavigate();
@@ -62,7 +63,14 @@ const RequestReportSpaces = () => {
         // Xử lý dữ liệu form tại đây
         handleRequestEditSpace(formData).then((data) => {
             handleOK()
-        })
+        }).catch((error) => {
+           Swal.fire({
+                title: "Thất bại!",
+                text: "Không gửi được yêu cầu",
+                icon: "error",
+                confirmButtonText: "Ok"
+           })
+        });
         setSubmitting(false);
     };
 
