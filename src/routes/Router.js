@@ -34,6 +34,8 @@ import AddUser from "../pages/Department/ManagerUser/AddUser";
 import AddSpaces from "../pages/Department/ManageSpace/AddSpace";
 import AddSurface from "../pages/Department/ManageSurface/AddSurface";
 
+import ListSurfaceNormal from "../pages/WARD_DISTRICT/Surfaces/SurfaceNormal";
+
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -131,22 +133,27 @@ const ThemeRoutes = [
         element: <ProtectedRoute>< EditSpace/></ProtectedRoute>,
       },
       {
-        path: "/danh-sach-dia-diem-quang-cao",
+        path: "/danh-sach-yeu-cau-dia-diem",
         exact: true,
         element: <ProtectedRoute>< ListRequestAddSpaces /></ProtectedRoute>,
       },
       {
-        path: "/yeu-cau-them-diadiem-quang-cao",
+        path: "/danh-sach-yeu-cau-bang-quang-cao",
+        exact: true,
+        element: <ProtectedRoute>< ListSurfaceNormal /></ProtectedRoute>,
+      },
+      {
+        path: "/yeu-cau-them-dia-diem",
         exact: true,
         element: <ProtectedRoute>< RequestAddSpaces /></ProtectedRoute>,
       },
       {
-        path: "/yeu-cau-chinh-sua-dia-diem-quang-cao/:requestSpaceId",
+        path: "/yeu-cau-chinh-sua-dia-diem/:requestSpaceId",
         exact: true,
         element: <ProtectedRoute>< RequestEditSpaces /></ProtectedRoute>,
       },
       {
-        path: "/danh-sach-yeu-cau-them-bang-quang-cao/:spaceId",
+        path: "/danh-sach-bang-quang-cao-theo-space/:spaceId",
         exact: true,
         element: <ProtectedRoute>< ListRequestAddSurfaces /></ProtectedRoute>,
       },{

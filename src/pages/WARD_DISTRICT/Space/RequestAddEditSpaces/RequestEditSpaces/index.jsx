@@ -61,7 +61,7 @@ const RequestEditSpaces = () => {
     formData.append('locationTypes', params.locationTypes);
     formData.append('ward', params.ward);
     formData.append('district', params.district);
-
+    formData.append('space', requestSpaceId);
     handleRequestEditSpaces(formData).then((response) => {
       const {status} = response;
       if (status === 200 || status === 201) {
@@ -71,7 +71,7 @@ const RequestEditSpaces = () => {
           showConfirmButton: true,
         }).then((result) => {
           if(result.isConfirmed) {
-            navigate('/danh-sach-dia-diem-quang-cao');
+            navigate('/danh-sach-yeu-cau-dia-diem');
           }
         })
       }
@@ -79,7 +79,7 @@ const RequestEditSpaces = () => {
   }
 
   const handleLoadRequestEditSpaces = async () => {
-    const response = await axiosService.get(`/temp-space/${requestSpaceId}`);
+    const response = await axiosService.get(`/spaces/${requestSpaceId}`);
     return response;
   }
 
@@ -97,8 +97,8 @@ const RequestEditSpaces = () => {
         formikRef.current.setFieldValue('longitude', data.longitude);
         formikRef.current.setFieldValue('address', data.address);
         formikRef.current.setFieldValue('imgUrl', data.imgUrl);
-        formikRef.current.setFieldValue('ward', data?.ward);
-        formikRef.current.setFieldValue('district', data?.district);
+        formikRef.current.setFieldValue('ward', data?.ward?.id);
+        formikRef.current.setFieldValue('district', data?.district?.id);
       }
     })
   }, []);
@@ -106,7 +106,7 @@ const RequestEditSpaces = () => {
   return (
       <>
         <Container>
-          <h3 className={"fw-bolder"}>Tạo yêu cầu thêm địa điểm mới</h3>
+          <h3 className={"fw-bolder"}>Tạo yêu cầu chỉnh cửa địa điểm mới</h3>
           <Card className={"p-3"}>
             <CardSubtitle className={"fw-bolder"}>Hãy chọn 1 điểm cần đặt trên bảng đồ</CardSubtitle>
             <br/>

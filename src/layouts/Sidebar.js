@@ -16,17 +16,22 @@ const Sidebar = () => {
           icon: "bi bi-speedometer2",
         },
         {
-          title: "Danh sách yêu cầu tạo địa điểm quảng cáo",
-          href: "/danh-sach-dia-diem-quang-cao",
+          title: "Danh sách yêu cầu điểm đặt (thêm/chỉnh sửa) địa điểm chờ Sở Duyệt",
+          href: "/danh-sach-yeu-cau-dia-diem",
           icon: "bi bi-layout-split",
         },
         {
-          title: "Danh sách báo cáo địa điểm",
+          title: "Danh sách yêu cầu bảng quảng cáo (thêm/chỉnh sửa) địa điểm chờ Sở Duyệt",
+          href: "/danh-sach-yeu-cau-bang-quang-cao",
+          icon: "bi bi-layout-split",
+        },
+        {
+          title: "Danh sách báo cáo địa điểm từ người dân gửi lên",
           href: "/danh-sach-bao-cao-dia-diem",
           icon: "bi bi-card-text",
         },
         {
-          title: "Danh sách báo cáo bảng quảng cáo",
+          title: "Danh sách báo cáo bảng quảng cáo từ người dân gửi lên",
           href: "/danh-sach-bao-cao-bang-quang-cao",
           icon: "bi bi-card-text",
         },
@@ -82,12 +87,12 @@ const Sidebar = () => {
             icon: "bi bi-map",
         },
         {
-          title: "Xem và xét duyệt yêu cầu cấp phép điểm quảng cáo (temp_space)",
+          title: "Xem và xét duyệt yêu cầu cấp phép điểm quảng cáo",
           href: "/xem-va-xet-duyet-yeu-cau-cap-phep-diem-quang-cao",
           icon: "bi bi-person-circle",
         },
         {
-          title: "Xem và xét duyệt yêu cầu cấp phép bảng quảng cáo (temp_surface)",
+          title: "Xem và xét duyệt yêu cầu cấp phép bảng quảng cáo",
           href: "/xem-va-xet-duyet-yeu-cau-cap-phep-bang-quang-cao",
           icon: "bi bi-check2-circle",
         },

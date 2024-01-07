@@ -60,7 +60,7 @@ const RequestEditSurfaces = () => {
           showConfirmButton: true,
         }).then((result) => {
           if(result.isConfirmed) {
-            navigate(`/danh-sach-yeu-cau-them-bang-quang-cao/${params?.space}`);
+            navigate(`/danh-sach-bang-quang-cao-theo-space/${params?.space}`);
           }
         })
       }

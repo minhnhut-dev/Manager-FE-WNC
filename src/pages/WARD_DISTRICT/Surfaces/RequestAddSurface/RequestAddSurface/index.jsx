@@ -70,7 +70,7 @@ const RequestAddSurfaces = () => {
   return (
       <>
         <Container>
-          <h3 className={"fw-bolder"}>Tạo yêu cầu thêm địa điểm mới</h3>
+          <h3 className={"fw-bolder"}>Tạo yêu cầu thêm bảng quảng cáo mới</h3>
           <Card className={"p-3"} innerRef={formInput}>
             <Col md={12}>
               <Formik

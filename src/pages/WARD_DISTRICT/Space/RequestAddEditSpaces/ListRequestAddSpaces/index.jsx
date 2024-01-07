@@ -74,14 +74,9 @@ const RequestAddSpaces = () => {
            <Card>
              <CardBody>
                <CardTitle tag="h4" className="fw-bold">
-                 Danh sách yêu cầu tạo địa điểm
+                 Danh sách yêu cầu điểm đặt (thêm/chỉnh sửa) địa điểm chờ Sở Duyệt
                </CardTitle>
-               <Link to="/yeu-cau-them-diadiem-quang-cao">
-                 <Button color={"success"}>
-                   Thêm yêu cầu tạo địa điểm mới
-                 </Button>
-               </Link>
-
+              
                <Table className="no-wrap mt-3 align-middle" responsive borderless>
                  <thead>
                  <tr>
@@ -124,7 +119,7 @@ const RequestAddSpaces = () => {
                                <i className="bi bi-trash-fill"></i>
                              </button>
                          }
-                         {/*<Link to={`/danh-sach-yeu-cau-them-bang-quang-cao/${tdata?.id}`}>*/}
+                         {/*<Link to={`/danh-sach-bang-quang-cao-theo-space/${tdata?.id}`}>*/}
                          {/*  <button className="btn btn-primary btn-sm">*/}
                          {/*       Xem các bảng quảng cáo*/}
                          {/*  </button>*/}
