@@ -40,6 +40,11 @@ const ListSpaceNormal = () => {
     })
   }, []);
 
+  const zone = {
+    Planned: "Quy hoạch",
+    Unplanned: "Chưa quy hoạch",
+  }
+
   return (
     <>
       <Container>
@@ -57,16 +62,19 @@ const ListSpaceNormal = () => {
               <Table className="no-wrap mt-3 align-middle" responsive borderless>
                 <thead>
                   <tr>
+                    <td>#</td>
                     <th>Loại hình quảng cáo</th>
                     <th>Địa chỉ điểm đặt</th>
                     <th>Hình ảnh</th>
                     <th>Loại vị trí</th>
+                    <th>Quy hoạch</th>
                     <th>Chức năng</th>
                   </tr>
                 </thead>
                 <tbody>
                   {listSpaces.map((tdata, index) => (
                     <tr key={index} className="border-top">
+                      <td>{tdata?.id}</td>
                       <td>
                         <div className="d-flex align-items-center p-2">
                           <div className="ms-3">
@@ -81,6 +89,7 @@ const ListSpaceNormal = () => {
                       <td>
                         {tdata?.locationTypes?.name}
                       </td>
+                      <td> { zone[tdata?.zone]}</td>
 
                       <td className={"d-flex gap-1"}>
                         <Link to={`/yeu-cau-chinh-sua-dia-diem/${tdata?.id}`}>
