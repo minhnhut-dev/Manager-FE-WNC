@@ -71,7 +71,7 @@ const RequestEditSpaces = () => {
           showConfirmButton: true,
         }).then((result) => {
           if(result.isConfirmed) {
-            navigate('/danh-sach-dia-diem-quang-cao');
+            navigate('/danh-sach-yeu-cau-dia-diem');
           }
         })
       }
@@ -106,7 +106,7 @@ const RequestEditSpaces = () => {
   return (
       <>
         <Container>
-          <h3 className={"fw-bolder"}>Tạo yêu cầu thêm địa điểm mới</h3>
+          <h3 className={"fw-bolder"}>Tạo yêu cầu chỉnh cửa địa điểm mới</h3>
           <Card className={"p-3"}>
             <CardSubtitle className={"fw-bolder"}>Hãy chọn 1 điểm cần đặt trên bảng đồ</CardSubtitle>
             <br/>

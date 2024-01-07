@@ -16,17 +16,22 @@ const Sidebar = () => {
           icon: "bi bi-speedometer2",
         },
         {
-          title: "Danh sách yêu cầu tạo địa điểm quảng cáo",
-          href: "/danh-sach-dia-diem-quang-cao",
+          title: "Danh sách yêu cầu điểm đặt (thêm/chỉnh sửa) địa điểm chờ Sở Duyệt",
+          href: "/danh-sach-yeu-cau-dia-diem",
           icon: "bi bi-layout-split",
         },
         {
-          title: "Danh sách báo cáo địa điểm",
+          title: "Danh sách yêu cầu bảng quảng cáo (thêm/chỉnh sửa) địa điểm chờ Sở Duyệt",
+          href: "/danh-sach-yeu-cau-bang-quang-cao",
+          icon: "bi bi-layout-split",
+        },
+        {
+          title: "Danh sách báo cáo địa điểm từ người dân gửi lên",
           href: "/danh-sach-bao-cao-dia-diem",
           icon: "bi bi-card-text",
         },
         {
-          title: "Danh sách báo cáo bảng quảng cáo",
+          title: "Danh sách báo cáo bảng quảng cáo từ người dân gửi lên",
           href: "/danh-sach-bao-cao-bang-quang-cao",
           icon: "bi bi-card-text",
         },

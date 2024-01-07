@@ -70,7 +70,7 @@ const RequestAddSpaces = () => {
           showConfirmButton: true,
         }).then((result) => {
           if(result.isConfirmed) {
-            navigate('/danh-sach-dia-diem-quang-cao');
+            navigate('/danh-sach-yeu-cau-dia-diem');
           }
          })
       }
